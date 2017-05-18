@@ -6,15 +6,15 @@ feature 'oauth' do
     before { visit '/link' }
 
     it 'when the user logs in' do
-      expect(page).to have_current_path('/login')
+      expect(page).to have_current_path('/link')
     end
 
-    it 'should have a login button' do
-      expect(page).to have_selector(:link_or_button, 'Login')
+    it 'should have a link button' do
+      expect(page).to have_selector(:link_or_button, 'Link TrainingPeaks')
     end
 
     it 'authenticates the user' do
-      click_on 'Login'
+      click_on 'Link TrainingPeaks'
       expect(page).to have_current_path('/')
     end
   end
