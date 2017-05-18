@@ -11,7 +11,7 @@ feature 'oauth' do
     end
 
     it 'when a user clicks login' do
-
+       
     end
   end
 end
