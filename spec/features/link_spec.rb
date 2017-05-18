@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'oauth' do
   context 'user login' do
 
-    before { visit '/login' }
+    before { visit '/link' }
 
     it 'when the user logs in' do
       expect(page).to have_current_path('/login')
