@@ -10,8 +10,8 @@ feature 'oauth' do
       expect(page).to have_current_path('/login')
     end
 
-    it 'when a user clicks login' do
-       
+    it 'should have a login button' do
+      expect(page).to have_selector(:link_or_button, 'Login')
     end
   end
 end
