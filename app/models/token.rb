@@ -20,4 +20,12 @@ class Token < ApplicationRecord
     parsed_body = JSON.parse(response.env.body, symbolize_names: true)
     @access_token = parsed_body[:access_token]
   end
+
+  def expired?
+    if Time.now == self.expires_at
+      true
+    else
+      false
+    end
+  end
 end

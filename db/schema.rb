@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519202842) do
+ActiveRecord::Schema.define(version: 20170519212422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,9 +18,10 @@ ActiveRecord::Schema.define(version: 20170519202842) do
   create_table "tokens", force: :cascade do |t|
     t.string "access_token"
     t.string "token_type"
-    t.integer "expires_in"
+    t.datetime "expires_at"
     t.string "refresh_token"
     t.string "scope"
+    t.integer "expires_in"
   end
 
 end

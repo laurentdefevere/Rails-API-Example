@@ -1,9 +1,9 @@
 class PostController < ApplicationController
-  # before_action
+  before_action :validate_token, only: [:create]
+
   def new; end
 
   def create
-    token = Token.first
     conn = Faraday.new('https://api.sandbox.trainingpeaks.com') do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
@@ -15,13 +15,24 @@ class PostController < ApplicationController
       req.headers['Authorization'] = "Bearer #{token.access_token}"
       req.params = {
         'scope': 'metrics:write',
-        'DateTime': DateTime.parse(params.keys[2]).utc,
+        'DateTime': DateTime.new.utc,
         'UploadClient': params[:upload_client],
         'Appetite': params[:appetite]
       }
       req.body = req.params.to_json
     end
-    require 'pry'; binding.pry
+  end
+
+  private
+
+  def validate_token
+    if token.expired?
+      token.refresh
+    end
+  end
+
+  def token
+    Token.first
   end
 end
 # pryhodatest2

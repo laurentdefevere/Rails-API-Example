@@ -46,8 +46,6 @@ class OauthController < ApplicationController
     parsed_body = JSON.parse(response.env.body, symbolize_names: true)
     create_update_token(parsed_body)
 
-    require 'pry'; binding.pry
-
     redirect_to new_post_path
   end
 
@@ -55,11 +53,17 @@ class OauthController < ApplicationController
 
   def create_update_token(parsed_body)
     if Token.first.nil?
-      Token.create(parsed_body)
+      token = Token.create(parsed_body)
+      token.update(expires_at: expired_time)
     else
       Token.first.update(parsed_body)
+      Token.first.update(expires_at: expired_time)
     end
     Token.first
+  end
+
+  def expired_time
+    Time.now + 3300
   end
 
 end
