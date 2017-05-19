@@ -1,0 +1,17 @@
+<%= form_tag('/upload') do %>
+  <%= label_tag :date_time, "Date time: "%>
+  <%= datetime_select DateTime.now, prefix: :date_time %>
+  <%= label_tag :upload_client, "Client ID: " %>
+  <%= text_field_tag :upload_client %>
+  <%= label_tag :appetite, "appetite: " %>
+  <%= select_tag :appetite, options_for_select([["ExtremelyHungry"], ["VeryHungry"], ["Hungry"], ["Satisfied"], ["Full"], ["VeryFull"], ["ExtremelyFull"]]) %>
+  <%= submit_tag "Submit Data" %>
+<% end %>
+</div>
+<%# ExtremelyHungry %>
+<%# VeryHungry %>
+<%# Hungry %>
+<%# Satisfied %>
+<%# Full %>
+<%# VeryFull %>
+<%# ExtremelyFull %>

@@ -30,5 +30,4 @@ class Token
     body_as_json = JSON.parse(response.env.body, symbolize_names: true)
     @access_token = body_as_json[:access_token]
   end
-
 end

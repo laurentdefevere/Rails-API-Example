@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :oauth, only: [:new, :create]
 
   get '/oauth2/callback', to: 'oauth#create'
+
+  get '/upload', to: 'post#new', as: 'new_post'
+  post '/upload', to: 'post#create'
 end

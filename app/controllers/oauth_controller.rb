@@ -44,6 +44,9 @@ class OauthController < ApplicationController
       }
     end
     body_as_json = JSON.parse(response.env.body, symbolize_names: true)
-    token = Token.new(body_as_json)
+     
+    $token = Token.new(body_as_json)
+
+    redirect_to new_post_path
   end
 end
