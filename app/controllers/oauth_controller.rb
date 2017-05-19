@@ -43,10 +43,23 @@ class OauthController < ApplicationController
         'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ'
       }
     end
-    body_as_json = JSON.parse(response.env.body, symbolize_names: true)
-     
-    $token = Token.new(body_as_json)
+    parsed_body = JSON.parse(response.env.body, symbolize_names: true)
+    create_update_token(parsed_body)
+
+    require 'pry'; binding.pry
 
     redirect_to new_post_path
   end
+
+  private
+
+  def create_update_token(parsed_body)
+    if Token.first.nil?
+      Token.create(parsed_body)
+    else
+      Token.first.update(parsed_body)
+    end
+    Token.first
+  end
+
 end

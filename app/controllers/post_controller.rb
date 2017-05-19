@@ -3,6 +3,7 @@ class PostController < ApplicationController
   def new; end
 
   def create
+    token = Token.first
     conn = Faraday.new('https://api.sandbox.trainingpeaks.com') do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
@@ -11,7 +12,7 @@ class PostController < ApplicationController
     response = conn.post do |req|
       req.url '/v1/metrics'
       req.headers['Content-Type'] = 'application/json'
-      req.headers['Authorization'] = "Bearer #{$token.access_token}"
+      req.headers['Authorization'] = "Bearer #{token.access_token}"
       req.params = {
         'scope': 'metrics:write',
         'DateTime': DateTime.parse(params.keys[2]).utc,
