@@ -5,6 +5,6 @@ Rails.application.routes.draw do
 
   get '/oauth2/callback', to: 'oauth#create'
 
-  get '/upload', to: 'post#new', as: 'new_post'
-  post '/upload', to: 'post#create'
+  get '/upload', to: 'api#new', as: 'new_post'
+  post '/upload', to: 'api#create'
 end

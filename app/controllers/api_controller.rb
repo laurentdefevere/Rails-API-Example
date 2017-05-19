@@ -1,4 +1,4 @@
-class PostController < ApplicationController
+class ApiController < ApplicationController
   before_action :validate_token, only: [:create]
 
   def new; end
