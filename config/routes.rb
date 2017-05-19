@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'link#new'
   get '/link', to: 'link#new', as: 'login'
-  resources :sessions, only: [:new, :create]
+  resources :oauth, only: [:new, :create]
 
-  get '/oauth2/callback', to: 'sessions#create'
+  get '/oauth2/callback', to: 'oauth#create'
 end

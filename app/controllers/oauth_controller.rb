@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class OauthController < ApplicationController
   def new
     client = OAuth2::Client.new('quantisync', 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ', :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
     redirect_to client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         'grant_type': 'authorization_code'
       }
     end
-    render JSON.parse(response.body)
+    # render JSON.parse(response.body)
   end
 end
 
