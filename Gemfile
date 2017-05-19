@@ -25,6 +25,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
 gem 'faraday'
 gem 'oauth2'
+gem 'oauth2-client'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -57,7 +58,6 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
   gem 'pry'
   gem 'pry-byebug'
