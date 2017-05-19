@@ -43,5 +43,7 @@ class OauthController < ApplicationController
         'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ'
       }
     end
+    body_as_json = JSON.parse(response.env.body, symbolize_names: true)
+    token = Token.new(body_as_json)
   end
 end
