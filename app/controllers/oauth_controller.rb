@@ -1,34 +1,31 @@
 class OauthController < ApplicationController
-  attr_reader :client
   def new
     client = OAuth2::Client.new('quantisync', 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ', :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
     redirect_to client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
-    # pryhodatest2
   end
 
   def create
-    # client = OAuth2::Client.new('quantisync', 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ', :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
-    # client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
-    # token = client.auth_code.get_token(params[:code], :redirect_uri => 'http://localhost:3000/oauth2/callback')
+    client = OAuth2::Client.new('quantisync', 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ', :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
+    client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
+    token = client.auth_code.get_token(params[:code], :redirect_uri => 'http://localhost:3000/oauth2/callback')
 
-    conn = Faraday.new('https://oauth.trainingpeaks.com/') do |faraday|
-      faraday.request :url_encoded
-      faraday.adapter Faraday.default_adapter
-    end
+    # conn = Faraday.new('https://oauth.trainingpeaks.com') do |faraday|
+    #   faraday.request :url_encoded
+    #   faraday.adapter Faraday.default_adapter
+    # end
 
-    response = conn.post do |req|
-      req.url '/oauth/token'
-      req.headers['Content-Type'] = 'application/json'
-      req.params = {
-        'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ',
-        'client_id': 'quantisync',
-        'code': params[:code],
-        'redirect_uri': 'http://localhost:3000/oauth2/callback',
-        'grant_type': 'authorization_code'
-      }
-    end
+    # response = conn.post do |req|
+    #   req.url '/oauth/token'
+    #   req.headers['Content-Type'] = 'application/json'
+    #   req.params = {
+    #     'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ',
+    #     'client_id': 'quantisync',
+    #     'code': params[:code],
+    #     'redirect_uri': 'http://localhost:3000/oauth2/callback',
+    #     'grant_type': 'authorization_code'
+    #   }
+    # end
     require 'pry'; binding.pry
-    # render JSON.parse(response.body)
   end
 end
 
@@ -38,21 +35,5 @@ end
 # grant_type=authorization_code: must have the value “authorization_code” to exchange the token.
 # code: the authorization code in the previous step.
 # redirect_uri: This URI must match the redirect_uri used step 1.
-# client_secret: the unique client secret obtained from TrainingPeaks. Note: If you are using a library that will include the authentication cookies and headers from the user’s login (i.e. authenticated with the server), passing this parameter is not required.
-
-# conn = Faraday.new('https://oauth.trainingpeaks.com/') do |faraday|
-#   faraday.request :url_encoded
-#   faraday.adapter Faraday.default_adapter
-# end
-
-# conn.post do |req|
-#   req.url '/oauth/token'
-#   req.headers['Content-Type'] = 'application/json'
-#   req.body = ''
-#   req.params = {
-#     'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ',
-#     'client_id': 'quantisync',
-#     'code': params[:code],
-#     'redirect_uri': 'http://localhost:3000/oauth2/callback',
-#     'grant_type': 'authorization_code'
-#   }
+# client_secret: the unique client secret obtained from TrainingPeaks.
+# Note: If you are using a library that will include the authentication cookies and headers from the user’s login (i.e. authenticated with the server), passing this parameter is not required.
