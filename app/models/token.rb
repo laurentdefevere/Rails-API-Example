@@ -22,7 +22,7 @@ class Token < ApplicationRecord
   end
 
   def expired?
-    if Time.now == self.expires_at
+    if Time.now >= self.expires_at
       true
     else
       false
