@@ -1,10 +1,10 @@
 <%= form_tag('/upload') do %>
-  <%= label_tag :date_time, "Date time: "%>
-  <%= datetime_field_tag :date_time, DateTime.now %>
-  <%= label_tag :upload_client, "Client ID: " %>
-  <%= text_field_tag :upload_client, 'quantisync' %>
-  <%= label_tag :appetite, "Metric: " %>
-  <%= text_field_tag :appetite, "Satisfied" %>
+  <%= label_tag 'api_data[date_time]', "Date time: "%>
+  <%= datetime_field_tag 'api_data[date_time]', DateTime.now %>
+  <%= label_tag 'api_data[upload_client]', "Client ID: " %>
+  <%= text_field_tag 'api_data[upload_client]', 'quantisync' %>
+  <%= label_tag "api_data[metrics]", "Appetite: " %>
+  <%= text_field_tag "api_data[metrics][Appetite]", "Satisfied" %>
   <%= submit_tag "Post Metric" %>
 <% end %>
 </div>
