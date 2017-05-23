@@ -28,7 +28,6 @@ module OauthService
     end
   end
 
-
   private
 
   def conn
