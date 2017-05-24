@@ -1,6 +1,7 @@
 class OauthController < ApplicationController
   def new
-    # client = OAuth2::Client.new(<client_id goes here>, <client_secret goes here>, :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
+    # This is an example of the oauth flow using the gem 'oauth2-client'
+    # client = OAuth2::Client.new(ENV["client_id"], ENV["client_secret"], , :site => "#{ENV["oauth_base_url"]}/Oauth/Authorize")
     # redirect_to client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
 
     request = OauthService.request_authorization
@@ -8,7 +9,9 @@ class OauthController < ApplicationController
   end
 
   def create
-    # client = OAuth2::Client.new(<client_id goes here>, <client_secret goes here>, :site => 'https://oauth.sandbox.trainingpeaks.com/OAuth/Authorize/')
+    # If using the gem 'oauth2-client' at this stage you would receive the
+    # authorization code in the params, as params[:code]
+    # client = OAuth2::Client.new(ENV["client_id"], ENV["client_secret"], , :site => "#{ENV["oauth_base_url"]}/Oauth/Authorize")
     # client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
     # token = client.auth_code.get_token(params[:code], :redirect_uri => 'http://localhost:3000/oauth2/callback')
 
