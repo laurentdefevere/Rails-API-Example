@@ -55,4 +55,3 @@
   TrainingPeaks API. You should implement oauth and make calls to the TrainingPeaks API, in a
   way that makes sense for your app and follows the guidelines listed in the API
   docs.
-
