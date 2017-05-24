@@ -14,6 +14,7 @@ class OauthController < ApplicationController
 
     response = OauthService.receive_token(params[:code])
     parsed_body = JSON.parse(response.env.body, symbolize_names: true)
+    parsed_body[:expires_at] = expired_time
     create_update_token(parsed_body)
 
     redirect_to new_post_path
@@ -24,10 +25,8 @@ class OauthController < ApplicationController
   def create_update_token(parsed_body)
     if Token.first.nil?
       token = Token.create(parsed_body)
-      token.update(expires_at: expired_time)
     else
       Token.first.update(parsed_body)
-      Token.first.update(expires_at: expired_time)
     end
     Token.first
   end

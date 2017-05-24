@@ -2,7 +2,7 @@ module ApiService
   extend self
 
   def conn
-    Faraday.new(ENV["base_api_url"]) do |faraday|
+    Faraday.new(ENV["api_base_url"]) do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
     end
@@ -14,7 +14,7 @@ module ApiService
       req.headers["Content-Type"] = "application/json"
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = {
-        "scope": ENV["permissions"],
+        "scope": ENV["scopes"],
         "UploadClient": ENV["client_id"]
       }
       load_api_data_into_req(api_data, req)

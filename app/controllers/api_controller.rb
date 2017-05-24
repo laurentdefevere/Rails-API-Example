@@ -24,4 +24,3 @@ class ApiController < ApplicationController
     Token.first
   end
 end
-# pryhodatest2
