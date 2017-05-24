@@ -6,7 +6,7 @@
   - If this is a fresh install of Ruby, then `$ gem install bundler`
 * Rails Version
   - 5.1.1
-  - Install rails with `$ gem install rails`
+  - Install rails with `$ gem install rails -v 5.1.1`
 * Postgresql
   - [Postgresql](https://www.postgresql.org)
   - Install Postgresql
