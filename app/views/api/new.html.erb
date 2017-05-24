@@ -10,3 +10,11 @@
   <%= submit_tag "Post Metric" %>
 <% end %>
 </div>
+
+<%= form_tag('/upload') do %>
+  <%= label_tag "api_data[Filename]", "Filename: " %>
+  <%= text_field_tag "api_data[Filename]", "Example File Name" %>
+  <%= hidden_field_tag "api_data[Data]", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pwx creator=\"TPM OAuth Test\"><workout><sportType>Run</sportType><cmt>Garmin FR910XT </cmt><device id=\"\"><make>Garmin</make><model>FR910XT</model></device><time>2017-05-24T12:00:00</time><summarydata><beginning>0.000</beginning><duration>3600.00</duration><durationstopped>0</durationstopped><dist>15000.0</dist></summarydata></workout></pwx>" %>
+  <%= submit_tag "Post File" %>
+<% end %>
+</div>

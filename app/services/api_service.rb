@@ -22,18 +22,34 @@ module ApiService
     end
   end
 
+  def post_file(api_data, token)
+    conn.post do |req|
+      req.url "/v1/file"
+      req.headers["Content-Type"] = "application/json"
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
+      req.params = {
+        "scope": ENV["scopes"],
+        "UploadClient": ENV["client_id"]
+      }
+      load_api_data_into_req(api_data, req)
+      req.body = req.params.to_json
+    end
+  end
+
   private
 
   def load_api_data_into_req(api_data, req)
-    api_data.each_pair do |metric, value|
-      if metric.downcase == "datetime"
-        req.params[metric] = value.to_datetime.utc
-      elsif metric_ints.include?(metric.downcase)
-        req.params[metric] = value.to_i
-      elsif metric_floats.include?(metric.downcase)
-        req.params[metric] = value.to_f
+    api_data.each_pair do |key, value|
+      if key.downcase == "datetime"
+        req.params[key] = value.to_datetime.utc
+      elsif metric_ints.include?(key.downcase)
+        req.params[key] = value.to_i
+      elsif metric_floats.include?(key.downcase)
+        req.params[key] = value.to_f
+      elsif key.downcase == 'data'
+        req.params[key] == Base64.encode64(value)
       else
-        req.params[metric] = value
+        req.params[key] = value
       end
     end
   end
