@@ -5,8 +5,8 @@ module OauthService
     conn.get do |req|
       req.url '/Oauth/Authorize'
       req.params = {
-        'client_secret': "#{client_secret}",
-        'client_id': "#{client_id}",
+        'client_secret': ENV["client_secret"],
+        'client_id': ENV["client_id"],
         'scope': 'metrics:write',
         'redirect_uri': 'http://localhost:3000/oauth2/callback',
         'response_type': 'code'
@@ -19,11 +19,11 @@ module OauthService
       req.url '/oauth/token'
       req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       req.body = {
-        'client_id': "#{client_id}",
+        'client_id': ENV["client_id"],
         'grant_type': 'authorization_code',
         'code': authorization_code,
         'redirect_uri': 'http://localhost:3000/oauth2/callback',
-        'client_secret': "#{client_secret}"
+        'client_secret': ENV["client_secret"]
       }
     end
   end
@@ -31,17 +31,10 @@ module OauthService
   private
 
   def conn
-    Faraday.new('https://oauth.sandbox.trainingpeaks.com') do |faraday|
+    Faraday.new(ENV["oauth_base_url"]) do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
     end
   end
 
-  def client_id
-    client_id = 'quantisync'
-  end
-
-  def client_secret
-    client_secret = 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ'
-  end
 end

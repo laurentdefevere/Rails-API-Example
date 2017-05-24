@@ -2,7 +2,7 @@ module ApiService
   extend self
 
   def conn
-    Faraday.new("https://api.sandbox.trainingpeaks.com") do |faraday|
+    Faraday.new(ENV["base_api_url"]) do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
     end
@@ -14,9 +14,9 @@ module ApiService
       req.headers["Content-Type"] = "application/json"
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = {
-        "scope": "metrics:write",
+        "scope": ENV["permissions"],
         "DateTime": date_time_to_utc(api_data[:date_time]),
-        "UploadClient": api_data[:upload_client],
+        "UploadClient": ENV["client_id"],
         "Appetite": api_data[:metrics][:Appetite]
       }
       req.body = req.params.to_json
