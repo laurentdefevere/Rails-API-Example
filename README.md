@@ -13,7 +13,7 @@
 
 #### To get started:
 
-* Start up postgresql
+* Start up Postgresql
 * `$ git clone https://github.com/Robbie-Smith/api-example.git`
 * `$ cd api-example`
 * `$ bundle install`
