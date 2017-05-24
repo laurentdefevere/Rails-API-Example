@@ -49,7 +49,7 @@
 
 * gem [Figaro](https://github.com/laserlemon/figaro)
   - This app uses Figaro to protect the environment variables.
-  - For more information on how to use figaro, reference the figaro docs linked
+  - For more information on how to use Figaro, reference the Figaro docs linked
     above.
 * This app is just one example of how to implement oauth and make calls to the
   TrainingPeaks API. You should implement oauth and make calls to the TrainingPeaks API, in a
