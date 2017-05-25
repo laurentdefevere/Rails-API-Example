@@ -6,8 +6,7 @@ class ApiController < ApplicationController
   end
 
   def create
-    api_service = select_correct_action[params[:commit]]
-    # require 'pry'; binding.pry
+    api_service = ApiService.post_data(params[:commit], params[:api_data], token)
     if api_service.success?
       redirect_to new_post_path
     else
@@ -25,12 +24,5 @@ class ApiController < ApplicationController
 
   def token
     Token.first
-  end
-
-  def select_correct_action
-    {
-      'Post File' => ApiService.post_file(params[:api_data], token),
-      'Post Metric' => ApiService.post_metrics(params[:api_data], token)
-    }
   end
 end

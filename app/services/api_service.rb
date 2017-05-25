@@ -1,6 +1,11 @@
 module ApiService
   extend self
 
+  self::ENDPOINTS = {
+    'Post Metric' => 'v1/metrics',
+    'Post File' => '/v1/file'
+  }
+
   def conn
     Faraday.new(ENV["api_base_url"]) do |faraday|
       faraday.request :url_encoded
@@ -8,23 +13,9 @@ module ApiService
     end
   end
 
-  def post_metrics(api_data, token)
+  def post_data(api_action, api_data, token)
     conn.post do |req|
-      req.url "/v1/metrics"
-      req.headers["Content-Type"] = "application/json"
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = {
-        "scope": ENV["scopes"],
-        "UploadClient": ENV["client_id"]
-      }
-      load_api_data_into_req(api_data, req)
-      req.body = req.params.to_json
-    end
-  end
-
-  def post_file(api_data, token)
-    conn.post do |req|
-      req.url "/v1/file"
+      req.url ENDPOINTS[api_action]
       req.headers["Content-Type"] = "application/json"
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = {
@@ -47,7 +38,6 @@ module ApiService
       elsif metric_floats.include?(key.downcase)
         req.params[key] = value.to_f
       elsif key.downcase == 'data'
-        # require 'pry'; binding.pry
         req.params[key] = Base64.encode64(value)
       else
         req.params[key] = value
