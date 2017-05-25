@@ -4,7 +4,8 @@ module ApiService
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
-    'Get Workout' => "/v1/workouts"
+    'Get Workout' => "/v1/workouts",
+    'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}"
   }
 
   def conn
@@ -15,22 +16,28 @@ module ApiService
   end
 
   def post_data(api_action, api_data, token)
-    conn.post do |req|
+    response = conn.post do |req|
       req.url ENDPOINTS[api_action]
       req.headers["Content-Type"] = "application/json"
       req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = {
-        "scope": ENV["scopes"],
-        "UploadClient": ENV["client_id"]
-      }
+      req.params = { "scope": ENV["scopes"], "UploadClient": ENV["client_id"] }
       load_api_data_into_req(api_data, req)
       req.body = req.params.to_json
     end
+    response.env
   end
 
-  def get_data(api_action, api_data, token)
+  def get_workout(api_action, api_data, token)
     response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:Start_date]}/#{api_data[:End_date]}") do |req|
-      # req.headers["Authorization"] = "Bearer #{token.access_token}"
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
+      req.params = { "scope": ENV["scopes"] }
+    end
+    response.env
+  end
+
+  def get_wod(token)
+    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS['Get Wod']}") do |req|
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"] }
     end
     response.env

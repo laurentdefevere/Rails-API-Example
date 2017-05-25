@@ -8,11 +8,11 @@ class Api::MainController < ApplicationController
   end
 
   def create
-    api_service = ApiService.post_data(params[:commit], params[:api_data], token)
-    if api_service.success?
+    response = ApiService.post_data(params[:commit], params[:api_data], token)
+    if response.success?
       redirect_to dashboard_path
     else
-      render status: 400
+      render json: {status: response.status, reason: response.reason_phrase }
     end
   end
 
