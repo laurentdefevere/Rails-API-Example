@@ -29,7 +29,7 @@ module ApiService
   end
 
   def get_workout(api_action, api_data, token)
-    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:Start_date]}/#{api_data[:End_date]}") do |req|
+    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:start_date]}/#{api_data[:end_date]}") do |req|
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"] }
     end
