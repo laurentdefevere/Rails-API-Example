@@ -1,12 +1,6 @@
 module ApiService
   extend self
 
-# Resource endpoint: /v1/workouts/wod/file/{workout id}/?format={format}
-# HTTP Method: GET
-# OAuth Scope Required: workouts:wod
-# Input:
-# The workout id. Required.
-# The requested file format. Required.
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
