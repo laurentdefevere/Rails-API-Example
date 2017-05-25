@@ -7,11 +7,18 @@
     <%= submit_tag "Get Workout" %>
   <% end %>
 </div>
-
-<br>
 <div>
   <%= form_tag('/retrieve') do %>
+    <%= label_tag "api_data[workout_id]", "Workout id: " %>
+    <%= text_field_tag "api_data[workout_id]", "425421628" %>
+    <%= label_tag "api_data[file_format]", "File format: " %>
+    <%= text_field_tag "api_data[file_format]", "mrc" %>
+    <%= submit_tag "Get File" %>
+  <% end %>
+</div>
+<div>
+  <%= form_tag('/retrieve') do %>
+    <%= label_tag "Click to get today's workout: " %>
     <%= submit_tag "Get Wod" %>
   <% end %>
 </div>
-</br>

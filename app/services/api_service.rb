@@ -1,11 +1,18 @@
 module ApiService
   extend self
 
+# Resource endpoint: /v1/workouts/wod/file/{workout id}/?format={format}
+# HTTP Method: GET
+# OAuth Scope Required: workouts:wod
+# Input:
+# The workout id. Required.
+# The requested file format. Required.
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
     'Get Workout' => "/v1/workouts",
-    'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}"
+    'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
+    'Get File' => "/v1/workouts/wod/file"
   }
 
   def conn
@@ -40,6 +47,15 @@ module ApiService
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"] }
     end
+    response.env
+  end
+
+  def get_file(api_action, api_data, token)
+    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:workout_id]}") do |req|
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
+      req.params = { "scope": ENV["scopes"], "format": api_data[:file_format] }
+    end
+    # require 'pry'; binding.pry
     response.env
   end
 

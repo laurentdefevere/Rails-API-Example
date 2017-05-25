@@ -2,11 +2,9 @@ class WorkoutController < ApplicationController
   def show
     response = select_endpoint
     if response.success?
-      parsed_body = JSON.parse(response.body)
-      cleaned_json = remove_nil_from_json(parsed_body)
-      render json: cleaned_json
+      render json: response.body
     else
-      render json: {status: response.status, reason: response.reason_phrase }
+      render json: {status: response.status, reason: response.reason_phrase, message: JSON.parse(response.body) }
     end
   end
 
@@ -16,15 +14,13 @@ class WorkoutController < ApplicationController
     Token.first
   end
 
-  def remove_nil_from_json(parsed_body)
-    parsed_body.map(&:compact)
-  end
-
   def select_endpoint
     if params[:commit] == 'Get Wod'
       ApiService.get_wod(token)
     elsif params[:commit] == 'Get Workout'
       ApiService.get_workout(params[:commit], params[:api_data], token)
+    elsif params[:commit] == 'Get File'
+      ApiService.get_file(params[:commit], params[:api_data], token)
     end
   end
 end
