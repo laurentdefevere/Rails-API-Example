@@ -4,7 +4,7 @@ module ApiService
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
-    'Get Workout' => "/v1/workouts/"
+    'Get Workout' => "/v1/workouts"
   }
 
   def conn
@@ -29,14 +29,11 @@ module ApiService
   end
 
   def get_data(api_action, api_data, token)
-    response = conn.get do |req|
-    require 'pry'; binding.pry
-      req.url ENDPOINTS[api_action]
+    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:Start_date]}/#{api_data[:End_date]}") do |req|
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"] }
-      # load_api_data_into_req(api_data, req)
-      # req.body = req.params.to_json
     end
-    require 'pry'; binding.pry
+    response.env
   end
 
   private
