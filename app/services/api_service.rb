@@ -30,7 +30,7 @@ module ApiService
 
   def get_data(api_action, api_data, token)
     response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:Start_date]}/#{api_data[:End_date]}") do |req|
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
+      # req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"] }
     end
     response.env
