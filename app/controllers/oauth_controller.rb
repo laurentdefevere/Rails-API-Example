@@ -19,9 +19,8 @@ class OauthController < ApplicationController
     parsed_body[:expires_at] = expired_time
     create_update_token(parsed_body)
 
-    redirect_to new_post_path
+    redirect_to dashboard_path
   end
-
   private
 
   def create_update_token(parsed_body)

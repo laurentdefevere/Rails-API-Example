@@ -1,0 +1,9 @@
+<div>
+  <%= form_tag('/retrieve') do %>
+    <%= label_tag "api_data[Start date]", "Start date: " %>
+    <%= text_field_tag "api_data[Start date]", Time.local(2017,5,23) %>
+    <%= label_tag "api_data[End date]", "End date: " %>
+    <%= text_field_tag "api_data[End date]", Time.local(2017,5,25) %>
+    <%= submit_tag "Get Workout" %>
+  <% end %>
+</div>

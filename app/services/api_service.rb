@@ -3,7 +3,8 @@ module ApiService
 
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
-    'Post File' => '/v1/file'
+    'Post File' => '/v1/file',
+    'Get Workout' => "/v1/workouts/"
   }
 
   def conn
@@ -25,6 +26,17 @@ module ApiService
       load_api_data_into_req(api_data, req)
       req.body = req.params.to_json
     end
+  end
+
+  def get_data(api_action, api_data, token)
+    response = conn.get do |req|
+    require 'pry'; binding.pry
+      req.url ENDPOINTS[api_action]
+      req.params = { "scope": ENV["scopes"] }
+      # load_api_data_into_req(api_data, req)
+      # req.body = req.params.to_json
+    end
+    require 'pry'; binding.pry
   end
 
   private
