@@ -55,7 +55,6 @@ module ApiService
       req.headers["Authorization"] = "Bearer #{token.access_token}"
       req.params = { "scope": ENV["scopes"], "format": api_data[:file_format] }
     end
-    # require 'pry'; binding.pry
     response.env
   end
 
