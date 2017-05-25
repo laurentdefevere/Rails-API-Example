@@ -47,7 +47,8 @@ module ApiService
       elsif metric_floats.include?(key.downcase)
         req.params[key] = value.to_f
       elsif key.downcase == 'data'
-        req.params[key] == Base64.encode64(value)
+        # require 'pry'; binding.pry
+        req.params[key] = Base64.encode64(value)
       else
         req.params[key] = value
       end

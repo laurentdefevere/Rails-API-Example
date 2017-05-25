@@ -1,15 +1,12 @@
 class ApiController < ApplicationController
   before_action :validate_token, only: [:create]
 
-  def new; end
+  def new
+    @token = token
+  end
 
   def create
-    # require 'pry'; binding.pry
-    # api_service = ApiService.post_metrics(params[:api_data], token)
-    # api_service = ApiService.post_file(params[:api_data], token)
     api_service = select_correct_action[params[:commit]]
-    # require 'pry'; binding.pry
-    # b = a['Post File']
     # require 'pry'; binding.pry
     if api_service.success?
       redirect_to new_post_path
