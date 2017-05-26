@@ -7,7 +7,7 @@ module OauthService
       req.params = {
         'client_secret': ENV["client_secret"],
         'client_id': ENV["client_id"],
-        'scope': ENV["scopes"],
+        'scope': token.scope,
         'redirect_uri': 'http://localhost:3000/oauth2/callback',
         'response_type': 'code'
       }
@@ -37,4 +37,7 @@ module OauthService
     end
   end
 
+  def token
+   Token.first
+  end
 end

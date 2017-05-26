@@ -14,7 +14,7 @@ module ApiService
       faraday.request :url_encoded
       faraday.headers["Content-Type"] = "application/json"
       faraday.headers["Authorization"] = "Bearer #{token.access_token}"
-      faraday.params = { "scope": ENV["scopes"] }
+      faraday.params = { "scope": token.scope }
       faraday.adapter Faraday.default_adapter
     end
   end
