@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/oauth2/callback', to: 'oauth#create'
 
-  get '/post', to: 'api/main#new', as: 'new_post'
+  get '/examples', to: 'api/main#new', as: 'new_post'
   post '/post', to: 'api/main#create'
   get '/get', to: 'workout#index', as: 'get'
   post '/get', to: 'workout#show'

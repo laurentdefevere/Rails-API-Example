@@ -73,6 +73,6 @@ module ApiService
   end
 
   def token
-    Token.first
+   Token.first
   end
 end
