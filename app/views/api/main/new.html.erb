@@ -1,6 +1,5 @@
 <div>
-  <%= form_tag('/upload') do %>
-    <% if @token.scope.include?('metrics:write') %>
+  <%= form_tag('/post') do %>
       <%= label_tag 'api_data[DateTime]', "Date time: "%>
       <%= datetime_field_tag 'api_data[DateTime]', DateTime.now %>
       <%= label_tag "api_data[Appetite]", "Appetite: " %>
@@ -10,18 +9,42 @@
       <%= label_tag "api_data[SleepElevationInMeters]", "Sleep Elevation" %>
       <%= text_field_tag "api_data[SleepElevationInMeters]", "5280" %>
       <%= submit_tag "Post Metric" %>
-    <% end %>
   <% end %>
 </div>
 
 <div>
-  <%= form_tag('/upload') do %>
-    <% if @token.scope.include?('file:write') %>
+  <%= form_tag('/post') do %>
       <%= label_tag "api_data[Filename]", "Filename: " %>
       <%= text_field_tag "api_data[Filename]", "Example File Name" %>
       <%= hidden_field_tag "api_data[Data]", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><pwx creator=\"TPM OAuth Test\"><workout><sportType>Run</sportType><cmt>Garmin FR910XT </cmt><device id=\"\"><make>Garmin</make><model>FR910XT</model></device><time>2017-05-24T12:00:00</time><summarydata><beginning>0.000</beginning><duration>3600.00</duration><durationstopped>0</durationstopped><dist>15000.0</dist></summarydata></workout></pwx>" %>
       <%= submit_tag "Post File" %>
-    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag('/get') do %>
+    <%= label_tag "api_data[start_date]", "Start date: " %>
+    <%= text_field_tag "api_data[start_date]", Time.local(2017,5,23).strftime("%Y-%m-%d") %>
+    <%= label_tag "api_data[end_date]", "End date: " %>
+    <%= text_field_tag "api_data[end_date]", Time.local(2017,5,25).strftime("%Y-%m-%d") %>
+    <%= submit_tag "Get Workout" %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag('/get') do %>
+    <%= label_tag "api_data[workout_id]", "Workout id: " %>
+    <%= text_field_tag "api_data[workout_id]", "425421628" %>
+    <%= label_tag "api_data[file_format]", "File format: " %>
+    <%= text_field_tag "api_data[file_format]", "mrc" %>
+    <%= submit_tag "Get File" %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_tag('/get') do %>
+    <%= label_tag "Click to get today's workout: " %>
+    <%= submit_tag "Get Wod" %>
   <% end %>
 </div>
 
