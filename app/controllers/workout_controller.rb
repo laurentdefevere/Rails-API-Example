@@ -10,17 +10,13 @@ class WorkoutController < ApplicationController
 
   private
 
-  def token
-    Token.first
-  end
-
   def select_endpoint
     if params[:commit] == 'Get Wod'
-      ApiService.get_wod(token)
+      ApiService.get_wod
     elsif params[:commit] == 'Get Workout'
-      ApiService.get_workout(params[:commit], params[:api_data], token)
+      ApiService.get_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get File'
-      ApiService.get_file(params[:commit], params[:api_data], token)
+      ApiService.get_file(params[:commit], params[:api_data])
     end
   end
 end

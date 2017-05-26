@@ -1,14 +1,12 @@
 class Api::MainController < ApplicationController
   before_action :validate_token, only: [:create]
 
-  def index; end
-
   def new
     @token = token
   end
 
   def create
-    response = ApiService.post_data(params[:commit], params[:api_data], token)
+    response = ApiService.post_data(params[:commit], params[:api_data])
     if response.success?
       redirect_to dashboard_path
     else
@@ -27,4 +25,5 @@ class Api::MainController < ApplicationController
   def token
     Token.first
   end
+
 end

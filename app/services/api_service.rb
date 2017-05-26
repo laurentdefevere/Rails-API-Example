@@ -12,50 +12,44 @@ module ApiService
   def conn
     Faraday.new(ENV["api_base_url"]) do |faraday|
       faraday.request :url_encoded
+      faraday.headers["Content-Type"] = "application/json"
+      faraday.headers["Authorization"] = "Bearer #{token.access_token}"
+      faraday.params = { "scope": ENV["scopes"] }
       faraday.adapter Faraday.default_adapter
     end
   end
 
-  def post_data(api_action, api_data, token)
+  def post_data(api_action, post_data)
     response = conn.post do |req|
       req.url ENDPOINTS[api_action]
-      req.headers["Content-Type"] = "application/json"
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = { "scope": ENV["scopes"], "UploadClient": ENV["client_id"] }
-      load_api_data_into_req(api_data, req)
+      req.params["UploadClient"] = ENV["client_id"]
+      load_api_data_into_req(post_data, req)
       req.body = req.params.to_json
     end
     response.env
   end
 
-  def get_workout(api_action, api_data, token)
-    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:start_date]}/#{api_data[:end_date]}") do |req|
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = { "scope": ENV["scopes"] }
-    end
+  def get_workout(api_action, post_data)
+    response = conn.get("#{ENDPOINTS[api_action]}/#{post_data[:start_date]}/#{post_data[:end_date]}")
     response.env
   end
 
-  def get_wod(token)
-    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS['Get Wod']}") do |req|
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = { "scope": ENV["scopes"] }
-    end
+  def get_wod
+    response = conn.get("#{ENDPOINTS['Get Wod']}")
     response.env
   end
 
-  def get_file(api_action, api_data, token)
-    response = Faraday.get("#{ENV["api_base_url"]}#{ENDPOINTS[api_action]}/#{api_data[:workout_id]}") do |req|
-      req.headers["Authorization"] = "Bearer #{token.access_token}"
-      req.params = { "scope": ENV["scopes"], "format": api_data[:file_format] }
+  def get_file(api_action, post_data)
+    response = conn.get("#{ENDPOINTS[api_action]}/#{post_data[:workout_id]}") do |req|
+      req.params["format"] = post_data[:file_format]
     end
     response.env
   end
 
   private
 
-  def load_api_data_into_req(api_data, req)
-    api_data.each_pair do |key, value|
+  def load_api_data_into_req(post_data, req)
+    post_data.each_pair do |key, value|
       if key.downcase == "datetime"
         req.params[key] = value.to_datetime.utc
       elsif metric_ints.include?(key.downcase)
@@ -76,5 +70,9 @@ module ApiService
 
   def metric_floats
     %w(bmi hrv musclemass numbertimeswoken percentfat sleepelevationinmeters sleephours spo2 timeindeepsleep timeinlightsleep timeinremsleep totaltimeawake waterpercent weightinkilograms).freeze
+  end
+
+  def token
+    Token.first
   end
 end
