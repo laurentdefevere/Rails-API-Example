@@ -1,10 +1,11 @@
 class WorkoutController < ApplicationController
   def show
     response = select_endpoint
+    # require 'pry'; binding.pry
     if response.success?
       render json: response.body
     else
-      render json: {status: response.status, reason: response.reason_phrase, message: JSON.parse(response.body) }
+      render json: {status: response.status, reason: response.reason_phrase  }
     end
   end
 
