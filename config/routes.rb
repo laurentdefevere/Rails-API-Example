@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   root 'link#new'
   get '/link', to: 'link#new', as: 'login'
-  get '/dashboard', to: 'dashboard#index', as: 'dashboard'
 
   resources :oauth, only: [:new, :create]
 
@@ -9,6 +8,6 @@ Rails.application.routes.draw do
 
   get '/examples', to: 'api/main#new', as: 'new_post'
   post '/post', to: 'api/main#create'
-  get '/get', to: 'workout#index', as: 'get'
-  post '/get', to: 'workout#show'
+  # get '/get', to: 'api/workout#index', as: 'get'
+  get '/get', to: 'api/retrieve#show', as: 'get'
 end

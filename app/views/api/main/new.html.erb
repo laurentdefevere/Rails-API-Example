@@ -52,7 +52,7 @@
     <h4> Structured Workout File </h4>
     <h4> This is an example of the making a get request to "/v1/workouts/wod/file/{workout id}/?format={format}" </h4>
     <h4> Supported file formats: "erg","fit","mrc","zwo" </h4>
-    <%= form_tag("/get") do %>
+    <%= form_tag("/get", method: :get) do %>
       <%= label_tag "api_data[workout_id]", "Workout id: " %>
       <%= text_field_tag "api_data[workout_id]", "425421628" %>
       <%= label_tag "api_data[file_format]", "File format: " %>
@@ -65,10 +65,21 @@
     <h4>GET</h4>
     <h4> Workout of the day </h4>
     <h4> This is an example of make a get request to "/v1/workouts/{date}"</h4>
-    <%= form_tag("/get") do %>
+    <%= form_tag("/get", method: :get) do %>
       <%= label_tag "Click to get today's workout: " %>
       <%= submit_tag "Get Wod" %>
     <% end %>
   </div>
 <% end %>
 
+<% if @token.scope.include?("coach:athletes") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Coaches Athletes </h4>
+    <h4> This is an example of make a get request to "/v1/coach/athletes"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= label_tag "Click to get your athletes: " %>
+      <%= submit_tag "Get Athletes" %>
+    <% end %>
+  </div>
+<% end %>
