@@ -8,6 +8,5 @@ Rails.application.routes.draw do
 
   get '/examples', to: 'api/main#new', as: 'new_post'
   post '/post', to: 'api/main#create'
-  # get '/get', to: 'api/workout#index', as: 'get'
   get '/get', to: 'api/retrieve#show', as: 'get'
 end
