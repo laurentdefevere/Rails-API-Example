@@ -17,8 +17,6 @@ class Api::RetrieveController < ApplicationController
       ApiService.get_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get File'
       ApiService.get_file(params[:commit], params[:api_data])
-    elsif params[:commit] == 'Get Athletes'
-      ApiService.get_athletes(params[:commit])
     end
   end
 end
