@@ -71,15 +71,3 @@
     <% end %>
   </div>
 <% end %>
-
-<% if @token.scope.include?("coach:athletes") %>
-  <div>
-    <h4>GET</h4>
-    <h4> Coaches Athletes </h4>
-    <h4> This is an example of make a get request to "/v1/coach/athletes"</h4>
-    <%= form_tag("/get", method: :get) do %>
-      <%= label_tag "Click to get your athletes: " %>
-      <%= submit_tag "Get Athletes" %>
-    <% end %>
-  </div>
-<% end %>
