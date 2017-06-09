@@ -36,7 +36,7 @@
     <h4>GET</h4>
     <h4> Workouts </h4>
     <h4> This is an example of making a get request to "/v1/workouts/{start date}/{end date}"</h4>
-    <%= form_tag("/get") do %>
+    <%= form_tag("/get", method: :get) do %>
       <%= label_tag "api_data[start_date]", "Start date: " %>
       <%= text_field_tag "api_data[start_date]", Time.local(2017,5,23).strftime("%Y-%m-%d") %>
       <%= label_tag "api_data[end_date]", "End date: " %>
