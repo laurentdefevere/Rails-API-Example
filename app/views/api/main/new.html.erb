@@ -1,4 +1,4 @@
-<% if @token.scope.include?("metrics:write")  %>
+<% if current_token.scope.include?("metrics:write")  %>
   <div>
     <h4>POST</h4>
     <h4>Post Metrics</h4>
@@ -17,7 +17,7 @@
   </div>
 <% end %>
 
-<% if @token.scope.include?("file:write") %>
+<% if current_token.scope.include?("file:write") %>
   <div>
     <h4>POST</h4>
     <h4>Upload a file</h4>
@@ -31,7 +31,7 @@
   </div>
 <% end %>
 
-<% if @token.scope.include?("workouts:read") %>
+<% if current_token.scope.include?("workouts:read") %>
   <div>
     <h4>GET</h4>
     <h4> Workouts </h4>
@@ -46,7 +46,7 @@
   </div>
 <% end %>
 
-<% if @token.scope.include?("workouts:wod") %>
+<% if current_token.scope.include?("workouts:wod") %>
   <div>
     <h4>GET</h4>
     <h4> Structured Workout File </h4>

@@ -1,4 +1,6 @@
 class OauthController < ApplicationController
+  skip_before_action :validate_token
+
   def new
     # This is an example of the oauth flow using the gem 'oauth2-client'
     # client = OAuth2::Client.new(ENV["client_id"], ENV["client_secret"], , :site => "#{ENV["oauth_base_url"]}/Oauth/Authorize")
@@ -25,11 +27,11 @@ class OauthController < ApplicationController
 
   def create_update_token(parsed_body)
     if Token.first.nil?
-      token = Token.create(parsed_body)
+      Token.create(parsed_body)
     else
       Token.first.update(parsed_body)
     end
-    Token.first
+    # Token.first
   end
 
   def expired_time
