@@ -1,4 +1,5 @@
 class Api::RetrieveController < ApplicationController
+  before_action :validate_token
   def show
     response = select_endpoint
     if response.success?
@@ -18,5 +19,15 @@ class Api::RetrieveController < ApplicationController
     elsif params[:commit] == 'Get File'
       ApiService.get_file(params[:commit], params[:api_data])
     end
+  end
+
+  def validate_token
+    if token.expired?
+      token.refresh
+    end
+  end
+
+  def token
+    Token.first
   end
 end

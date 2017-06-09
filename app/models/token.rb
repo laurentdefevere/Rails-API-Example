@@ -10,15 +10,16 @@ class Token < ApplicationRecord
       req.url '/oauth/token'
       req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
       req.body = {
-        'client_id': 'quantisync',
-        'client_secret': 'oo3kiF56PZQtRcIIzHqkZSRxezp3ayVnmmWiSGzdpQ',
+        'client_id': ENV['client_id'],
+        'client_secret': ENV['client_secret'],
         'grant_type': 'refresh_token',
-        'refresh_token': refresh_token,
+        'refresh_token': self.refresh_token,
         'redirect_uri': 'http://localhost:3000/oauth2/callback',
       }
     end
     parsed_body = JSON.parse(response.env.body, symbolize_names: true)
-    @access_token = parsed_body[:access_token]
+    parsed_body[:expires_at] = expired_time
+    self.update(parsed_body)
   end
 
   def expired?
@@ -27,5 +28,9 @@ class Token < ApplicationRecord
     else
       false
     end
+  end
+
+  def expired_time
+    Time.now + 3300
   end
 end
