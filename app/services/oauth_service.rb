@@ -8,7 +8,7 @@ module OauthService
         'client_secret': ENV["client_secret"],
         'client_id': ENV["client_id"],
         'scope': ENV["scopes"],
-        'redirect_uri': 'http://localhost:3000/oauth2/callback',
+        'redirect_uri': ENV["redirect_uri"],
         'response_type': 'code'
       }
     end
@@ -22,7 +22,7 @@ module OauthService
         'client_id': ENV["client_id"],
         'grant_type': 'authorization_code',
         'code': authorization_code,
-        'redirect_uri': 'http://localhost:3000/oauth2/callback',
+        'redirect_uri': ENV["redirect_uri"],
         'client_secret': ENV["client_secret"]
       }
     end
