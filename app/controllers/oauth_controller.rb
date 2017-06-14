@@ -31,7 +31,6 @@ class OauthController < ApplicationController
     else
       Token.first.update(parsed_body)
     end
-    # Token.first
   end
 
   def expired_time

@@ -1,5 +1,4 @@
 class Token < ApplicationRecord
-
   def refresh
     conn = Faraday.new('https://oauth.sandbox.trainingpeaks.com') do |faraday|
       faraday.request :url_encoded
