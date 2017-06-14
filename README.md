@@ -20,9 +20,12 @@
 * `$ rails db:create`
 * `$ rails db:migrate`
 * `$ rails s` to run the server locally
+  - Port 3000 is the default port.
   - **The app will not run unless all of the required keys are present.**
     - **Required keys: can be found in config/initializers/figaro.rb**
     - See the notes section below.
+  - **Environment Variables**
+    - All the environment variables live in config/application.yml
 * Using the browser of your choice visit localhost:3000/
 
 #### Folders/Files of interest:
