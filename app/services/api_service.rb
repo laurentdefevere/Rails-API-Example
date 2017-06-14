@@ -6,7 +6,8 @@ module ApiService
     'Post File' => '/v1/file',
     'Get Workout' => "/v1/workouts",
     'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
-    'Get File' => "/v1/workouts/wod/file"
+    'Get File' => "/v1/workouts/wod/file",
+    'Get Athletes' => "/v1/coach/athletes"
   }
 
   def post_data(api_action, post_data)
@@ -33,6 +34,11 @@ module ApiService
     response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:workout_id]}") do |req|
       req.params["format"] = get_data[:file_format]
     end
+    response.env
+  end
+
+  def get_athletes
+    response = conn.get(ENDPOINTS['Get Athletes'])
     response.env
   end
 
