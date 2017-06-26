@@ -4,6 +4,7 @@ module ApiService
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
+    'Post Plan' => 'v1/workouts/plan',
     'Get Workout' => "/v1/workouts",
     'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
     'Get File' => "/v1/workouts/wod/file",

@@ -17,11 +17,15 @@ class OauthController < ApplicationController
     # client.auth_code.authorize_url(:redirect_uri => 'http://localhost:3000/oauth2/callback')
     # token = client.auth_code.get_token(params[:code], :redirect_uri => ENV["redirect_uri"])
     response = OauthService.receive_token(params[:code])
-    parsed_body = JSON.parse(response.env.body, symbolize_names: true)
-    parsed_body[:expires_at] = expired_time
-    create_update_token(parsed_body)
+    if response.success?
+      parsed_body = JSON.parse(response.env.body, symbolize_names: true)
+      parsed_body[:expires_at] = expired_time
+      create_update_token(parsed_body)
 
-    redirect_to new_post_path
+      redirect_to new_post_path
+    else
+      render json: { body: JSON.parse(response.body) }
+    end
   end
   private
 
