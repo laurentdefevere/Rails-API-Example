@@ -8,7 +8,8 @@ module ApiService
     'Get Workout' => "/v1/workouts",
     'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
     'Get File' => "/v1/workouts/wod/file",
-    'Get Athletes' => "/v1/coach/athletes"
+    'Get Athletes' => "/v1/coach/athletes",
+    'Get Profile' => "/v1/athlete/profile"
   }
 
   def post_data(api_action, post_data)
@@ -40,6 +41,11 @@ module ApiService
 
   def get_athletes
     response = conn.get(ENDPOINTS['Get Athletes'])
+    response.env
+  end
+
+  def get_profile
+    response = conn.get(ENDPOINTS['Get Profile'])
     response.env
   end
 
