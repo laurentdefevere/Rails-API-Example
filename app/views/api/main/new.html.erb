@@ -70,6 +70,49 @@
       <%= submit_tag "Get Wod" %>
     <% end %>
   </div>
+  <% end %>
+
+<% if current_token.scope.include?("workouts:plan") %>
+<div>
+  <h4>Post</h4>
+  <h4> Workout Plan</h4>
+  <h4> This is an example of the making a post request to "/v1/workouts/plan" </h4>
+  <%= form_tag("/post") do %>
+    <%= label_tag "api_data[AthleteId]", "Athlete id: " %>
+    <%= text_field_tag "api_data[AthleteId]", "134129" %>
+    <%= label_tag "api_data[Title]", "Title: " %>
+    <%= text_field_tag "api_data[Title]", "Example Plan" %>
+    <%= label_tag "api_data[WorkoutDay]", "Workout Day: " %>
+    <%= text_field_tag "api_data[WorkoutDay]", DateTime.now %>
+    <%= label_tag "api_data[WorkoutType]", "Workout  Type: " %>
+    <%= text_field_tag "api_data[WorkoutType]", "run" %>
+    <%= label_tag "api_data[TotalTimePlanned]", "Total Time Planned: " %>
+    <%= text_field_tag "api_data[TotalTimePlanned]", "1" %>
+    <%= submit_tag "Post Plan" %>
+  <% end %>
+</div>
+<% end %>
+
+<% if current_token.scope.include?("athlete:profile") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Athlete profile </h4>
+    <h4> This is an example of making a get request to "/v1/athlete/profile"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= submit_tag "Get Profile" %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_token.scope.include?("coach:athletes") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Coach Athletes </h4>
+    <h4> This is an example of making a get request to "/v1/coach/athletes"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= submit_tag "Get Athletes" %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if current_token.scope.include?("coach:athletes") %>

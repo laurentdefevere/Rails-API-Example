@@ -4,10 +4,12 @@ module ApiService
   self::ENDPOINTS = {
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
+    'Post Plan' => 'v1/workouts/plan',
     'Get Workout' => "/v1/workouts",
     'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
     'Get File' => "/v1/workouts/wod/file",
-    'Get Athletes' => "/v1/coach/athletes"
+    'Get Athletes' => "/v1/coach/athletes",
+    'Get Profile' => "/v1/athlete/profile"
   }
 
   def post_data(api_action, post_data)
@@ -42,6 +44,14 @@ module ApiService
     response.env
   end
 
+<<<<<<< HEAD
+  def get_profile
+    response = conn.get(ENDPOINTS['Get Profile'])
+    response.env
+  end
+
+=======
+>>>>>>> e6ce10beb226069a10b71f6c788525182322d348
   private
 
   def conn
