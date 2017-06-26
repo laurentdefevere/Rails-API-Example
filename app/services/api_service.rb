@@ -44,11 +44,14 @@ module ApiService
     response.env
   end
 
+<<<<<<< HEAD
   def get_profile
     response = conn.get(ENDPOINTS['Get Profile'])
     response.env
   end
 
+=======
+>>>>>>> e6ce10beb226069a10b71f6c788525182322d348
   private
 
   def conn
