@@ -1,6 +1,10 @@
 class Token < ApplicationRecord
   def refresh
-    conn = Faraday.new('https://oauth.sandbox.trainingpeaks.com') do |faraday|
+   ssl_verify = true
+    if Rails.env.test?
+      ssl_verify = false
+    end
+    conn = Faraday.new(ENV["oauth_base_url"], :ssl => {:verify => ssl_verify}) do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
     end

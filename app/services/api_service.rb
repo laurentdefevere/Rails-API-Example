@@ -32,6 +32,11 @@ module ApiService
     response.env
   end
 
+  def get_wods(get_data)
+    response = conn.get("#{ENDPOINTS['Get Wod']}?numberOfDays=#{get_data[:number_of_days]}");
+    response.env
+  end
+
   def get_file(api_action, get_data)
     response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:workout_id]}") do |req|
       req.params["format"] = get_data[:file_format]
@@ -44,18 +49,19 @@ module ApiService
     response.env
   end
 
-<<<<<<< HEAD
   def get_profile
     response = conn.get(ENDPOINTS['Get Profile'])
     response.env
   end
 
-=======
->>>>>>> e6ce10beb226069a10b71f6c788525182322d348
   private
 
   def conn
-    Faraday.new(ENV["api_base_url"]) do |faraday|
+    ssl_verify = true
+    if Rails.env.test?
+      ssl_verify = false
+    end
+    Faraday.new(ENV["api_base_url"], :ssl => {:verify => ssl_verify}) do |faraday|
       faraday.request :url_encoded
       faraday.headers["Content-Type"] = "application/json"
       faraday.headers["Authorization"] = "Bearer #{token.access_token}"

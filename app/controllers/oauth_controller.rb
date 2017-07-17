@@ -5,7 +5,6 @@ class OauthController < ApplicationController
     # This is an example of the oauth flow using the gem 'oauth2-client'
     # client = OAuth2::Client.new(ENV["client_id"], ENV["client_secret"], , :site => "#{ENV["oauth_base_url"]}/Oauth/Authorize")
     # redirect_to client.auth_code.authorize_url(:redirect_uri => ENV["redirect_uri"])
-
     request = OauthService.request_authorization
     redirect_to request.env.url.to_s
   end
