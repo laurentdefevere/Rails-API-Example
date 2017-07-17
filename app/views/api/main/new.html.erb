@@ -64,10 +64,22 @@
   <div>
     <h4>GET</h4>
     <h4> Workout of the day </h4>
-    <h4> This is an example of make a get request to "/v1/workouts/{date}"</h4>
+    <h4> This is an example of make a get request to "/v1/workouts/wod/{date}"</h4>
     <%= form_tag("/get", method: :get) do %>
       <%= label_tag "Click to get today's workout: " %>
       <%= submit_tag "Get Wod" %>
+    <% end %>
+  </div>
+
+  <div>
+    <h4>GET</h4>
+    <h4> Multiple Workouts of the day </h4>
+    <h4> This is an example of make a get request to "/v1/workouts/wod/{date}?numberOfDays=4"</h4>
+    <%= form_tag("/get", method: :get) do %>
+    <%= label_tag "api_data[number_of_days]", "Number of Days:  " %>
+      <%= number_field_tag "api_data[number_of_days]", "1" %>
+      <%= label_tag "Click to get upcoming workouts: " %>
+      <%= submit_tag "Get Wods" %>
     <% end %>
   </div>
   <% end %>

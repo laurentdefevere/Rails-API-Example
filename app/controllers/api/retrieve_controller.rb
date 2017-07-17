@@ -13,6 +13,8 @@ class Api::RetrieveController < ApplicationController
   def select_endpoint
     if params[:commit] == 'Get Wod'
       ApiService.get_wod
+    elsif params[:commit] == 'Get Wods'
+      ApiService.get_wods(params[:api_data])
     elsif params[:commit] == 'Get Workout'
       ApiService.get_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get File'

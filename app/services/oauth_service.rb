@@ -31,7 +31,11 @@ module OauthService
   private
 
   def conn
-    Faraday.new(ENV["oauth_base_url"]) do |faraday|
+    ssl_verify = true
+    if Rails.env.test?
+      ssl_verify = false
+    end
+    Faraday.new(ENV["oauth_base_url"], :ssl => {:verify => ssl_verify}) do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
     end
