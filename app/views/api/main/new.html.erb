@@ -46,6 +46,22 @@
   </div>
 <% end %>
 
+<% if current_token.scope.include?("workouts:read") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Athlete Workouts </h4>
+    <h4> This is an example of making a get request to "/v1/workouts/{athleteId}/{start date}/{end date}"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= label_tag "api_data[AthleteId]", "Athlete id: " %>
+      <%= text_field_tag "api_data[athleteid]", "134129" %>
+      <%= label_tag "api_data[start_date]", "Start date: " %>
+      <%= text_field_tag "api_data[start_date]", Time.local(2017,5,23).strftime("%Y-%m-%d") %>
+      <%= label_tag "api_data[end_date]", "End date: " %>
+      <%= text_field_tag "api_data[end_date]", Time.local(2017,5,25).strftime("%Y-%m-%d") %>
+      <%= submit_tag "Get Athlete Workout" %>
+    <% end %>
+  </div>
+<% end %>
 <% if current_token.scope.include?("workouts:wod") %>
   <div>
     <h4>GET</h4>

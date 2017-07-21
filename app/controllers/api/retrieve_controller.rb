@@ -2,7 +2,7 @@ class Api::RetrieveController < ApplicationController
   def show
     response = select_endpoint
     if response.success?
-      render json: response.body
+      render body: response.body
     else
       render json: {status: response.status, reason: response.reason_phrase  }
     end
@@ -15,6 +15,8 @@ class Api::RetrieveController < ApplicationController
       ApiService.get_wod
     elsif params[:commit] == 'Get Wods'
       ApiService.get_wods(params[:api_data])
+    elsif params[:commit] == 'Get Athlete Workout'
+      ApiService.get_athlete_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get Workout'
       ApiService.get_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get File'
