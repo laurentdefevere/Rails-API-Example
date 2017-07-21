@@ -51,6 +51,7 @@
     <h4>GET</h4>
     <h4> Athlete Workouts </h4>
     <h4> This is an example of making a get request to "/v1/workouts/{athleteId}/{start date}/{end date}"</h4>
+    <h5> Note: this method is intended to be used by coach accounts<h5>
     <%= form_tag("/get", method: :get) do %>
       <%= label_tag "api_data[AthleteId]", "Athlete id: " %>
       <%= text_field_tag "api_data[athleteid]", "134129" %>
@@ -67,12 +68,12 @@
     <h4>GET</h4>
     <h4> Structured Workout File </h4>
     <h4> This is an example of the making a get request to "/v1/workouts/wod/file/{workout id}/?format={format}" </h4>
-    <h4> Supported file formats: "erg","fit","mrc","zwo" </h4>
+    <h4> Supported file formats: "json", "fit", "erg","mrc","zwo" </h4>
     <%= form_tag("/get", method: :get) do %>
       <%= label_tag "api_data[workout_id]", "Workout id: " %>
-      <%= text_field_tag "api_data[workout_id]", "425421628" %>
+      <%= text_field_tag "api_data[workout_id]", "123456789" %>
       <%= label_tag "api_data[file_format]", "File format: " %>
-      <%= text_field_tag "api_data[file_format]", "mrc" %>
+      <%= text_field_tag "api_data[file_format]", "json" %>
       <%= submit_tag "Get File" %>
     <% end %>
   </div>
@@ -80,7 +81,7 @@
   <div>
     <h4>GET</h4>
     <h4> Workout of the day </h4>
-    <h4> This is an example of make a get request to "/v1/workouts/wod/{date}"</h4>
+    <h4> This is an example of making a get request to "/v1/workouts/wod/{date}"</h4>
     <%= form_tag("/get", method: :get) do %>
       <%= label_tag "Click to get today's workout: " %>
       <%= submit_tag "Get Wod" %>
@@ -90,7 +91,8 @@
   <div>
     <h4>GET</h4>
     <h4> Multiple Workouts of the day </h4>
-    <h4> This is an example of make a get request to "/v1/workouts/wod/{date}?numberOfDays=4"</h4>
+
+    <h4> This is an example of making a get request to "/v1/workouts/wod/{date}?numberOfDays=4"</h4>
     <%= form_tag("/get", method: :get) do %>
     <%= label_tag "api_data[number_of_days]", "Number of Days:  " %>
       <%= number_field_tag "api_data[number_of_days]", "1" %>
@@ -104,10 +106,10 @@
 <div>
   <h4>Post</h4>
   <h4> Workout Plan</h4>
-  <h4> This is an example of the making a post request to "/v1/workouts/plan" </h4>
+  <h4> This is an example of making a post request to "/v1/workouts/plan" </h4>
   <%= form_tag("/post") do %>
     <%= label_tag "api_data[AthleteId]", "Athlete id: " %>
-    <%= text_field_tag "api_data[AthleteId]", "134129" %>
+    <%= text_field_tag "api_data[AthleteId]", "123456" %>
     <%= label_tag "api_data[Title]", "Title: " %>
     <%= text_field_tag "api_data[Title]", "Example Plan" %>
     <%= label_tag "api_data[WorkoutDay]", "Workout Day: " %>
@@ -136,17 +138,6 @@
   <div>
     <h4>GET</h4>
     <h4> Coach Athletes </h4>
-    <h4> This is an example of making a get request to "/v1/coach/athletes"</h4>
-    <%= form_tag("/get", method: :get) do %>
-      <%= submit_tag "Get Athletes" %>
-    <% end %>
-  </div>
-<% end %>
-
-<% if current_token.scope.include?("coach:athletes") %>
-  <div>
-    <h4>GET</h4>
-    <h4> Athletes </h4>
     <h4> This is an example of making a get request to "/v1/coach/athletes"</h4>
     <%= form_tag("/get", method: :get) do %>
       <%= submit_tag "Get Athletes" %>
