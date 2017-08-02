@@ -63,6 +63,28 @@
     <% end %>
   </div>
 <% end %>
+<% if current_token.scope.include?("events:read") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Athlete Next Event </h4>
+    <h4> This is an example of making a get request to "/v1/events/next"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= submit_tag "Get Next Event" %>
+    <% end %>
+  </div>
+<% end %>
+<% if current_token.scope.include?("events:read") %>
+  <div>
+    <h4>GET</h4>
+    <h4> Athlete Events </h4>
+    <h4> This is an example of making a get request to "/v1/events/{date}"</h4>
+    <%= form_tag("/get", method: :get) do %>
+      <%= label_tag "api_data[date]", "Date: " %>
+      <%= text_field_tag "api_data[date]", Time.local(2017,5,23).strftime("%Y-%m-%d") %>
+      <%= submit_tag "Get Event By Date" %>
+    <% end %>
+  </div>
+<% end %>
 <% if current_token.scope.include?("workouts:wod") %>
   <div>
     <h4>GET</h4>
@@ -122,7 +144,26 @@
   <% end %>
 </div>
 <% end %>
-
+<% if current_token.scope.include?("events:write") %>
+  <div>
+    <h4>Post</h4>
+    <h4> Event</h4>
+    <h4> This is an example of making a post request to "/v1/events" </h4>
+    <%= form_tag("/post") do %>
+      <%= label_tag "api_data[AthleteId]", "Athlete id: " %>
+      <%= text_field_tag "api_data[AthleteId]", "123456" %>
+      <%= label_tag "api_data[Name]", "Name: " %>
+      <%= text_field_tag "api_data[Name]", "Event Name" %>
+      <%= label_tag "api_data[EventDate]", "Event Day: " %>
+      <%= text_field_tag "api_data[EventDate]", DateTime.now %>
+      <%= label_tag "api_data[EventType]", "Workout  Type: " %>
+      <%= text_field_tag "api_data[EventType]", "CyclingRoad" %>
+      <%= label_tag "api_data[Description]", "Description: " %>
+      <%= text_field_tag "api_data[Description]", "" %>
+      <%= submit_tag "Post Event" %>
+    <% end %>
+  </div>
+<% end %>
 <% if current_token.scope.include?("athlete:profile") %>
   <div>
     <h4>GET</h4>

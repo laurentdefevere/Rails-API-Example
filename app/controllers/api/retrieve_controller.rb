@@ -15,6 +15,10 @@ class Api::RetrieveController < ApplicationController
       ApiService.get_wod
     elsif params[:commit] == 'Get Wods'
       ApiService.get_wods(params[:api_data])
+    elsif params[:commit] == 'Get Next Event'
+      ApiService.get_next_event(params[:api_data])
+    elsif params[:commit] == 'Get Event By Date'
+      ApiService.get_event_by_date(params[:api_data])
     elsif params[:commit] == 'Get Athlete Workout'
       ApiService.get_athlete_workout(params[:commit], params[:api_data])
     elsif params[:commit] == 'Get Workout'

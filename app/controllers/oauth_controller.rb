@@ -23,7 +23,6 @@ class OauthController < ApplicationController
 
       redirect_to new_post_path
     else
-      puts response.inspect
       render json: { body: JSON.parse(response.body) }
     end
   end

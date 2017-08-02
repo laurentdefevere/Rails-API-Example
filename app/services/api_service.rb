@@ -5,9 +5,11 @@ module ApiService
     'Post Metric' => 'v1/metrics',
     'Post File' => '/v1/file',
     'Post Plan' => 'v1/workouts/plan',
+    'Post Event' => '/v1/events',
     'Get Workout' => "/v1/workouts",
     'Get Athlete Workout' => "/v1/workouts",
-    'Get Wod' => "/v1/workouts/wod/#{Time.now.strftime("%Y-%m-%d")}",
+    'Get Wod' => "/v1/workouts/wod//#{Time.now.strftime("%Y-%m-%d")}",
+    'Get Event' => "/v1/events",
     'Get File' => "/v1/workouts/wod/file",
     'Get Athletes' => "/v1/coach/athletes",
     'Get Profile' => "/v1/athlete/profile"
@@ -20,11 +22,22 @@ module ApiService
       load_api_data_into_req(post_data, req)
       req.body = req.params.to_json
     end
+    puts response.inspect;
     response.env
   end
 
   def get_workout(api_action, get_data)
     response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:start_date]}/#{get_data[:end_date]}")
+    response.env
+  end
+
+  def get_next_event(get_data)
+    response = conn.get("#{ENDPOINTS['Get Event']}/next")
+    response.env
+  end
+    
+  def get_event_by_date(get_data)
+    response = conn.get("#{ENDPOINTS['Get Event']}/#{get_data[:date]}")
     response.env
   end
 
