@@ -1,3 +1,6 @@
+#### Wiki
+* [Documentation](https://github.com/Robbie-Smith/api-example/wiki)
+
 #### Dependencies
 
 * Ruby Version
