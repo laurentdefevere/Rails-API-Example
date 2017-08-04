@@ -35,7 +35,7 @@ module ApiService
     response = conn.get("#{ENDPOINTS['Get Event']}/next")
     response.env
   end
-    
+
   def get_event_by_date(get_data)
     response = conn.get("#{ENDPOINTS['Get Event']}/#{get_data[:date]}")
     response.env
