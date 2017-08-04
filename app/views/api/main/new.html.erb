@@ -63,6 +63,7 @@
     <% end %>
   </div>
 <% end %>
+
 <% if current_token.scope.include?("events:read") %>
   <div>
     <h4>GET</h4>
@@ -73,6 +74,7 @@
     <% end %>
   </div>
 <% end %>
+
 <% if current_token.scope.include?("events:read") %>
   <div>
     <h4>GET</h4>
@@ -85,6 +87,7 @@
     <% end %>
   </div>
 <% end %>
+
 <% if current_token.scope.include?("workouts:wod") %>
   <div>
     <h4>GET</h4>
@@ -155,9 +158,9 @@
       <%= label_tag "api_data[Name]", "Name: " %>
       <%= text_field_tag "api_data[Name]", "Event Name" %>
       <%= label_tag "api_data[EventDate]", "Event Day: " %>
-      <%= text_field_tag "api_data[EventDate]", DateTime.now %>
+      <%= text_field_tag "api_data[EventDate]", DateTime.now + 1%>
       <%= label_tag "api_data[EventType]", "Workout  Type: " %>
-      <%= text_field_tag "api_data[EventType]", "CyclingRoad" %>
+      <%= text_field_tag "api_data[EventType]", "Cycling" %>
       <%= label_tag "api_data[Description]", "Description: " %>
       <%= text_field_tag "api_data[Description]", "" %>
       <%= submit_tag "Post Event" %>
