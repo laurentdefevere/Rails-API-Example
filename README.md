@@ -1,5 +1,5 @@
 #### Wiki
-* [Documentation](https://github.com/Robbie-Smith/api-example/wiki)
+* [Documentation](https://github.com/TrainingPeaks/Rails-API-Example/wiki)
 
 #### Dependencies
 
