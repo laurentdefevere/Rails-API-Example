@@ -17,7 +17,7 @@
 #### To get started:
 
 * Start up Postgresql
-* `$ git clone https://github.com/Robbie-Smith/api-example.git`
+* `$ git clone https://github.com/TrainingPeaks/Rails-API-Example.git`
 * `$ cd api-example`
 * `$ bundle install`
 * `$ rails db:create`
