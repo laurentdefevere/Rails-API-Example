@@ -18,9 +18,10 @@ module ApiService
   def post_data(api_action, post_data)
     response = conn.post do |req|
       req.url ENDPOINTS[api_action]
-      req.params["UploadClient"] = ENV["client_id"]
-      load_api_data_into_req(post_data, req)
-      req.body = req.params.to_json
+      params = {}
+      params["UploadClient"] = ENV["client_id"]
+      load_api_data_into_req(post_data, params)
+      req.body = params.to_json
     end
     puts response.inspect;
     response.env
@@ -48,6 +49,7 @@ module ApiService
 
   def get_wod
     response = conn.get("#{ENDPOINTS['Get Wod']}")
+    puts response.inspect
     response.env
   end
 
@@ -76,6 +78,7 @@ module ApiService
   private
 
   def conn
+    puts token.inspect
     ssl_verify = true
     if Rails.env.test?
       ssl_verify = false
@@ -84,23 +87,23 @@ module ApiService
       faraday.request :url_encoded
       faraday.headers["Content-Type"] = "application/json"
       faraday.headers["Authorization"] = "Bearer #{token.access_token}"
-      faraday.params = { "scope": token.scope }
       faraday.adapter Faraday.default_adapter
     end
   end
 
-  def load_api_data_into_req(post_data, req)
+  def load_api_data_into_req(post_data, params)
     post_data.each_pair do |key, value|
       if key.downcase == "datetime"
-        req.params[key] = value.to_datetime.utc
+        params[key] = value.to_datetime.utc
       elsif metric_ints.include?(key.downcase)
-        req.params[key] = value.to_i
+        params[key] = value.to_i
       elsif metric_floats.include?(key.downcase)
-        req.params[key] = value.to_f
+        params[key] = value.to_f
       elsif key.downcase == 'data'
-        req.params[key] = Base64.encode64(value)
+        params[key] = Base64.encode64(value.read)
+        params["filename"] = value.original_filename
       else
-        req.params[key] = value
+        params[key] = value
       end
     end
   end

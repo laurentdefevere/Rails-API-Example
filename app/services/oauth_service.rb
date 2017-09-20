@@ -28,6 +28,14 @@ module OauthService
     end
   end
 
+   def deauthorize_token(token)
+    puts token.inspect
+    conn.post do |req|
+      req.url '/oauth/deauthorize'
+      req.headers["Authorization"] = "Bearer #{token.access_token}"
+    end
+  end
+
   private
 
   def conn

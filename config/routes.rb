@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/link', to: 'link#new', as: 'login'
 
   resources :oauth, only: [:new, :create]
-
+  get '/oauth/deauth', to: 'oauth#deauth'
   get '/oauth2/callback', to: 'oauth#create'
 
   get '/examples', to: 'api/main#new', as: 'new_post'
