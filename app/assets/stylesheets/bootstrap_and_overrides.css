@@ -1,0 +1,16 @@
+/*
+  =require twitter-bootstrap-static/bootstrap
+
+  Static version of css will use Glyphicons sprites by default
+  =require twitter-bootstrap-static/sprites
+*/
+.row{
+	margin-top: 5px;
+}
+.container{
+	background: #EEE;
+    padding: 4em;
+}
+body{
+	background: #005695;
+}
