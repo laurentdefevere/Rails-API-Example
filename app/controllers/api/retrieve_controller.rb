@@ -35,6 +35,12 @@ class Api::RetrieveController < ApplicationController
 			ApiService.get_workout_since(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Coach Profile'
 			ApiService.get_coach_profile
+		elsif params[:commit] == 'Get Assistant Coaches'
+			ApiService.get_assistant_coaches
+		elsif params[:commit] == 'Get Assistant Coach'
+			ApiService.get_assistant_coach(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Assistant Coaches Athletes'
+			ApiService.get_assistant_coaches_atheltes(params[:commit], params[:api_data])
 		end
 	end
 end

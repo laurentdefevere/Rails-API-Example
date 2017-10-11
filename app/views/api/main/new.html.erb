@@ -210,9 +210,9 @@
 
 		<h5> This is an example of making a get request to "/v1/workouts/wod/{date}?numberOfDays=4"</h5>
 		<%= form_tag("/get", method: :get) do %>
-		<%= label_tag "api_data[number_of_days]", "Number of Days:  " %>
 			<div class="form-row">
 				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[number_of_days]", "Number of Days:  " %>
 					<%= number_field_tag "api_data[number_of_days]", "1", class: "form-control" %>
 				</div>
 			</div>
@@ -305,14 +305,50 @@
 			<%= submit_tag "Get Athletes", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
-	<!-- <div class="row">
+	<div class="row">
 		<h4>GET</h4>
 		<h4> Coach Profile </h4>
 		<h5> This is an example of making a get request to "/v1/coach/profile"</h5>
 		<%= form_tag("/get", method: :get) do %>
 			<%= submit_tag "Get Coach Profile", class: "btn btn-primary pull-right" %>
 		<% end %>
-	</div> -->
+	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4> Assistant Coaches </h4>
+		<h5> This is an example of making a get request to "/v1/coach/assistants"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<%= submit_tag "Get Assistant Coaches", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4> Assistant Coach </h4>
+		<h5> This is an example of making a get request to "/v1/coach/assistants/12345"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[assistant_id]", "Assistant Coach Id:  " %>
+					<%= number_field_tag "api_data[assistant_id]", "12345", class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Assistant Coach", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4> Assistant Coaches Athletes </h4>
+		<h5> This is an example of making a get request to "/v1/coach/assistants/12345/athletes"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[assistant_id]", "Assistant Coach Id:  " %>
+					<%= number_field_tag "api_data[assistant_id]", "1", class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Assistant Coaches Athletes", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
 <% end %>
 <div class="row">
 	<h4>Deauth</h4>

@@ -16,6 +16,7 @@ module ApiService
 		'Get Athlete Workouts Since' => '/v1/workouts/changes',
 		'Get Workouts Since' => '/v1/workouts/changes',
 		'Get Coach Profile' => '/v1/coach/profile',
+		'Get Assistant Coaches' => '/v1/coach/assistants'
 	}
 
 	def post_data(api_action, post_data)
@@ -75,6 +76,21 @@ module ApiService
 	
 	def get_coach_profile
 		response = conn.get(ENDPOINTS['Get Coach Profile'])
+		response.env
+	end
+
+	def get_assistant_coaches
+		response = conn.get(ENDPOINTS['Get Assistant Coaches'])
+		response.env
+	end
+
+	def get_assistant_coach(api_action, get_data)
+		response = conn.get("#{ENDPOINTS['Get Assistant Coaches']}/#{get_data[:assistant_id]}")
+		response.env
+	end
+
+	def get_assistant_coaches_atheltes(api_action, get_data)
+		response = conn.get("#{ENDPOINTS['Get Assistant Coaches']}/#{get_data[:assistant_id]}/athletes")
 		response.env
 	end
 	
