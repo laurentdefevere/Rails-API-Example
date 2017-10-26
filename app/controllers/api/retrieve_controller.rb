@@ -29,6 +29,14 @@ class Api::RetrieveController < ApplicationController
 			ApiService.get_athletes
 		elsif params[:commit] == 'Get Profile'
 			ApiService.get_profile
+		elsif params[:commit] == 'Get Zones'
+			ApiService.get_zones
+		elsif params[:commit] == 'Get Zones By Type'
+			ApiService.get_zones_by_type(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Zones For Athlete'
+			ApiService.get_zones_for_athlete(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Zones For Athlete By Type'
+			ApiService.get_zones_by_type_for_athlete(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Athlete Workouts Since'
 			ApiService.get_athlete_workout_since(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Workouts Since'

@@ -16,7 +16,8 @@ module ApiService
 		'Get Athlete Workouts Since' => '/v1/workouts/changes',
 		'Get Workouts Since' => '/v1/workouts/changes',
 		'Get Coach Profile' => '/v1/coach/profile',
-		'Get Assistant Coaches' => '/v1/coach/assistants'
+		'Get Assistant Coaches' => '/v1/coach/assistants',
+		'Get Zones' => '/v1/athlete/profile/zones'
 	}
 
 	def post_data(api_action, post_data)
@@ -96,6 +97,26 @@ module ApiService
 	
 	def get_profile
 		response = conn.get(ENDPOINTS['Get Profile'])
+		response.env
+	end
+
+	def get_zones
+		response = conn.get(ENDPOINTS['Get Zones'])
+		response.env
+	end
+
+	def get_zones_for_athlete(api_action, get_data)
+		response = conn.get("#{ENDPOINTS['Get Athletes']}/#{get_data[:athleteid]}/zones")
+		response.env
+	end
+
+	def get_zones_by_type(api_action, get_data)
+		response = conn.get("#{ENDPOINTS['Get Zones']}/#{get_data[:type]}")
+		response.env
+	end
+
+	def get_zones_by_type_for_athlete(api_action, get_data)
+		response = conn.get("#{ENDPOINTS['Get Athletes']}/#{get_data[:athleteid]}/zones/#{get_data[:type]}")
 		response.env
 	end
 

@@ -37,8 +37,16 @@
 		<h4>Upload a file</h4>
 		<h5>This is an example of making a post request to "/v1/file"</h5>
 		<%= form_tag("/post", multipart: true) do %>
-			<%= label_tag "api_data[Filename]", "Filename: " %>
-			<%= file_field_tag "api_data[Data]", class: "form-control-file" %>
+			<div class="form-row">
+				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[Data]", "Filename: " %>
+					<%= file_field_tag "api_data[Data]", class: "form-control-file" %>
+				</div>
+				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[Title]", "Title: " %>
+					<%= text_field_tag "api_data[title]", "", class: "form-control" %>
+				</div>
+			</div>
 			<%= submit_tag "Post File", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
@@ -74,7 +82,7 @@
 		<%= form_tag("/get", method: :get) do %>
 			<div class="form-row">
 				<div class="form-group col-xs-4">
-					<%= label_tag "api_data[AthleteId]", "Athlete id: " %>
+					<%= label_tag "api_data[athleteid]", "Athlete id: " %>
 					<%= text_field_tag "api_data[athleteid]", "134129", class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-4">
@@ -125,7 +133,7 @@
 		<%= form_tag("/get", method: :get) do %>
 			<div class="form-row">
 				<div class="form-group col-xs-4">
-					<%= label_tag "api_data[AthleteId]", "Athlete id: " %>
+					<%= label_tag "api_data[athleteid]", "Athlete id: " %>
 					<%= text_field_tag "api_data[athleteid]", "134129", class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-4">
@@ -229,8 +237,8 @@
 	<%= form_tag("/post") do %>
 		<div class="form-row">
 			<div class="form-group col-xs-2">
-				<%= label_tag "api_data[AthleteId]", "Athlete id: " %>
-				<%= text_field_tag "api_data[AthleteId]", "123456", class: "form-control" %>
+				<%= label_tag "api_data[athleteid]", "Athlete id: " %>
+				<%= text_field_tag "api_data[athleteid]", "123456", class: "form-control" %>
 			</div>
 			<div class="form-group col-xs-3">
 				<%= label_tag "api_data[Title]", "Title: " %>
@@ -261,8 +269,8 @@
 		<%= form_tag("/post") do %>
 		<div class="form-row">
 			<div class="form-group col-xs-2">
-				<%= label_tag "api_data[AthleteId]", "Athlete id: " %>
-				<%= text_field_tag "api_data[AthleteId]", "123456", class: "form-control" %>
+				<%= label_tag "api_data[athleteid]", "Athlete id: " %>
+				<%= text_field_tag "api_data[athleteid]", "123456", class: "form-control" %>
 			</div>
 			<div class="form-group col-xs-3">
 				<%= label_tag "api_data[Name]", "Name: " %>
@@ -294,6 +302,29 @@
 			<%= submit_tag "Get Profile", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4>Athlete Zones</h4>
+		<h5> This is an example of making a get request to "/v1/athlete/zones"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<%= submit_tag "Get Zones", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4>Athlete Zones By Type</h4>
+		<h5> This is an example of making a get request to "/v1/athlete/zones/{type}"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[type]", "Type: " %>
+					<%= select_tag "api_data[type]", options_for_select(["heartrate", "power", "speed"]), class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Zones By Type", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+
 <% end %>
 
 <% if current_token.scope.include?("coach:athletes") || current_token.scope.include?("coach")  %>
@@ -303,6 +334,39 @@
 		<h5> This is an example of making a get request to "/v1/coach/athletes"</h5>
 		<%= form_tag("/get", method: :get) do %>
 			<%= submit_tag "Get Athletes", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+		<div class="row">
+		<h4>GET</h4>
+		<h4>Coached Athlete's Zones</h4>
+		<h5> This is an example of making a get request to "/v1/coaches/athletes/{athlete_id}/zones"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-2">
+					<%= label_tag "api_data[athleteid]", "Athlete id: " %>
+					<%= text_field_tag "api_data[athleteid]", "123456", class: "form-control" %>
+				</div>
+			</div>
+
+			<%= submit_tag "Get Zones For Athlete", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET</h4>
+		<h4>Coached Athlete's Zones By Type</h4>
+		<h5> This is an example of making a get request to "/v1/coaches/athletes/{athlete_id}/zones"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-2">
+					<%= label_tag "api_data[athleteid]", "Athlete id: " %>
+					<%= text_field_tag "api_data[athleteid]", "123456", class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[type]", "Type: " %>
+					<%= select_tag "api_data[type]", options_for_select(["heartrate", "power", "speed"]), class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Zones For Athlete By Type", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
 	<div class="row">
