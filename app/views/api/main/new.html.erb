@@ -305,7 +305,7 @@
 	<div class="row">
 		<h4>GET</h4>
 		<h4>Athlete Zones</h4>
-		<h5> This is an example of making a get request to "/v1/athlete/zones"</h5>
+		<h5> This is an example of making a get request to "/v1/athlete/profile/zones"</h5>
 		<%= form_tag("/get", method: :get) do %>
 			<%= submit_tag "Get Zones", class: "btn btn-primary pull-right" %>
 		<% end %>
@@ -313,7 +313,7 @@
 	<div class="row">
 		<h4>GET</h4>
 		<h4>Athlete Zones By Type</h4>
-		<h5> This is an example of making a get request to "/v1/athlete/zones/{type}"</h5>
+		<h5> This is an example of making a get request to "/v1/athlete/profile/zones/{zone_type}"</h5>
 		<%= form_tag("/get", method: :get) do %>
 			<div class="form-row">
 				<div class="form-group col-xs-3">
@@ -354,7 +354,7 @@
 	<div class="row">
 		<h4>GET</h4>
 		<h4>Coached Athlete's Zones By Type</h4>
-		<h5> This is an example of making a get request to "/v1/coaches/athletes/{athlete_id}/zones"</h5>
+		<h5> This is an example of making a get request to "/v1/coaches/athletes/{athlete_id}/zones/{zone_type}"</h5>
 		<%= form_tag("/get", method: :get) do %>
 			<div class="form-row">
 				<div class="form-group col-xs-2">
