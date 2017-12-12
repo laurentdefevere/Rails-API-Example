@@ -17,7 +17,12 @@ module ApiService
 		'Get Workouts Since' => '/v1/workouts/changes',
 		'Get Coach Profile' => '/v1/coach/profile',
 		'Get Assistant Coaches' => '/v1/coach/assistants',
-		'Get Zones' => '/v1/athlete/profile/zones'
+		'Get Zones' => '/v1/athlete/profile/zones',
+		'Get Workout By Id' => '/v1/workouts/id',
+		'Get Workout Mean Maxes' => '/v1/workouts/id',
+		'Get Athelte Workout Mean Maxes' => '/v1/workouts',
+		'Get Workout Time In Zones' => '/v1/workouts/id',
+		'Get Athelte Workout Time In Zones' => '/v1/workouts'
 	}
 
 	def post_data(api_action, post_data)
@@ -28,12 +33,36 @@ module ApiService
 			load_api_data_into_req(post_data, params)
 			req.body = params.to_json
 		end
-		puts response.inspect;
 		response.env
 	end
 
 	def get_workout(api_action, get_data)
 		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:start_date]}/#{get_data[:end_date]}")
+		response.env
+	end
+
+	def get_workout_by_id(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:id]}")
+		response.env
+	end
+
+	def get_workout_meanmaxes(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:id]}/meanmaxes")
+		response.env
+	end
+
+	def get_athlete_workout_meanmaxes(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:athleteid]}/id/#{get_data[:id]}/meanmaxes")
+		response.env
+	end
+
+	def get_workout_timeinzones(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:id]}/timeinzones")
+		response.env
+	end
+
+	def get_athlete_workout_timeinzones(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:athleteid]}/id/#{get_data[:id]}/timeinzones")
 		response.env
 	end
 

@@ -23,6 +23,16 @@ class Api::RetrieveController < ApplicationController
 			ApiService.get_athlete_workout(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Workout'
 			ApiService.get_workout(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Workout By Id'
+			ApiService.get_workout_by_id(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Workout Mean Maxes'
+			ApiService.get_workout_meanmaxes(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Workout Time In Zones'
+			ApiService.get_workout_timeinzones(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Athelte Workout Mean Maxes'
+			ApiService.get_athlete_workout_meanmaxes(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Athelte Workout Time In Zones'
+			ApiService.get_athlete_workout_timeinzones(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get File'
 			ApiService.get_file(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Athletes'
