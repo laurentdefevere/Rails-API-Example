@@ -29,8 +29,6 @@ class OauthController < ApplicationController
 
 	def deauth
 		response = OauthService.deauthorize_token(Token.first)
-		puts response.inspect
-		render json: { "hi" => "hi" }
 	end
 
 	private

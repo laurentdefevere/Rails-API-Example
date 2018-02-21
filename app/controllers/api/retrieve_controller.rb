@@ -2,7 +2,12 @@ class Api::RetrieveController < ApplicationController
 	def show
 		response = select_endpoint
 		if response.success?
-			render body: response.body
+			if params[:commit] == 'Get File' && params[:api_data][:file_fomat] != 'json'
+				filename = "#{params[:api_data][:workout_id]}.#{params[:api_data][:file_format]}"
+				send_data(response.body, :disposition => 'attachment', :filename => filename)				
+			else
+				render body: response.body
+			end
 		else
 			render json: {status: response.status, reason: response.reason_phrase  }
 		end
@@ -15,6 +20,12 @@ class Api::RetrieveController < ApplicationController
 			ApiService.get_wod
 		elsif params[:commit] == 'Get Wods'
 			ApiService.get_wods(params[:api_data])
+		elsif params[:commit] == 'Get Metrics'
+			ApiService.get_metrics(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Workout Details'
+			ApiService.get_details(params[:commit], params[:api_data])
+		elsif params[:commit] == 'Get Metrics For Athlete'
+			ApiService.get_athlete_metrics(params[:commit], params[:api_data])
 		elsif params[:commit] == 'Get Next Event'
 			ApiService.get_next_event(params[:api_data])
 		elsif params[:commit] == 'Get Event By Date'

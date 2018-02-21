@@ -11,7 +11,7 @@
 			<div class="form-row">
 				<div class="form-group col-xs-3">
 					<%= label_tag "api_data[DateTime]", "Date time: "%>
-					<%= datetime_field_tag "api_data[DateTime]", DateTime.now, class: "form-control" %>
+					<%= date_field_tag "api_data[DateTime]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-3">
 					<%= label_tag "api_data[Appetite]", "Appetite: " %>
@@ -27,6 +27,44 @@
 				</div>
 			</div>
 			<%= submit_tag "Post Metric", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET Metrics by date range</h4>
+		<h5>This is an example of making a request to "/v1/metrics/{start_date}/{end_date}"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[start_date]", "Start Date: "%>
+					<%= date_field_tag "api_data[start_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[end_date]", "End Date: "%>
+					<%= date_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Metrics", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
+		<h4>GET Metrics by date range</h4>
+		<h5>This is an example of making a request to "/v1/metrics/{athleteid}/{start_date}/{end_date}"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[athleteid]", "Athlete Id: "%>
+					<%= text_field_tag "api_data[athleteid]", 123456, class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[start_date]", "Start Date: "%>
+					<%= date_field_tag "api_data[start_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[end_date]", "End Date: "%>
+					<%= date_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Metrics For Athlete", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
 <% end %>
@@ -62,11 +100,11 @@
 			<div class="form-row">
 				<div class="form-group col-xs-6">
 					<%= label_tag "api_data[start_date]", "Start date: " %>
-					<%= text_field_tag "api_data[start_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[start_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-6">
 					<%= label_tag "api_data[end_date]", "End date: " %>
-					<%= text_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 			</div>
 			<%= submit_tag "Get Workout", class: "btn btn-primary pull-right" %>
@@ -112,6 +150,19 @@
 		<% end %>
 	</div>
 	<div class="row">
+		<h4> GET Workout Details Data </h4>
+		<h5> This is an example of making a get request to "/v1/workouts/id/{id}/details"</h5>
+		<%= form_tag("/get", method: :get) do %>
+			<div class="form-row">
+				<div class="form-group col-xs-6">
+					<%= label_tag "api_data[id]", "Id: " %>
+					<%= number_field_tag "api_data[id]", 12345, class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Get Workout Details", class: "btn btn-primary pull-right" %>
+		<% end %>
+	</div>
+	<div class="row">
 		<h4> GET Workout Mean Maxes For Athlete </h4>
 		<h5> This is an example of making a get request to "/v1/workouts/{athleteid}/id/{id}/meanmaxes"</h5>
 		<%= form_tag("/get", method: :get) do %>
@@ -125,7 +176,7 @@
 					<%= number_field_tag "api_data[id]", 12345, class: "form-control" %>
 				</div>
 			</div>
-			<%= submit_tag "Get Athelte Workout Mean Maxes", class: "btn btn-primary pull-right" %>
+			<%= submit_tag "Get Athlete Workout Mean Maxes", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
 	<div class="row">
@@ -142,7 +193,7 @@
 					<%= number_field_tag "api_data[id]", 12345, class: "form-control" %>
 				</div>
 			</div>
-			<%= submit_tag "Get Athelte Workout Time In Zones", class: "btn btn-primary pull-right" %>
+			<%= submit_tag "Get Athlete Workout Time In Zones", class: "btn btn-primary pull-right" %>
 		<% end %>
 	</div>
 	<div class="row">
@@ -157,11 +208,11 @@
 				</div>
 				<div class="form-group col-xs-4">
 					<%= label_tag "api_data[start_date]", "Start date: " %>
-					<%= text_field_tag "api_data[start_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[start_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-4">
 					<%= label_tag "api_data[end_date]", "End date: " %>
-					<%= text_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[end_date]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 			</div>
 			<%= submit_tag "Get Athlete Workout", class: "btn btn-primary pull-right" %>
@@ -174,7 +225,7 @@
 			<div class="form-row">
 				<div class="form-group col-xs-4">
 					<%= label_tag "api_data[since_date]", "Last Modified Date: " %>
-					<%= text_field_tag "api_data[since_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[since_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-2">
 					<%= label_tag "api_data[page_size]", "Page Size: " %>
@@ -200,7 +251,7 @@
 				</div>
 				<div class="form-group col-xs-4">
 					<%= label_tag "api_data[since_date]", "Since date: " %>
-					<%= text_field_tag "api_data[since_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[since_date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-2">
 					<%= label_tag "api_data[page_size]", "Page Size: " %>
@@ -233,7 +284,7 @@
 			<div class="form-row">
 				<div class="form-group col-xs-6">
 					<%= label_tag "api_data[date]", "Date: " %>
-					<%= text_field_tag "api_data[date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
+					<%= date_field_tag "api_data[date]", 1.day.ago.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 			</div>
 			<%= submit_tag "Get Event By Date", class: "btn btn-primary pull-right"%>
@@ -257,7 +308,7 @@
 			</div>
 			<div class="form-group col-xs-2">
 				<%= label_tag "api_data[EventDate]", "Event Day: " %>
-				<%= text_field_tag "api_data[EventDate]", DateTime.now + 1, class: "form-control" %>
+				<%= date_field_tag "api_data[EventDate]", 1.day.from_now.strftime("%Y-%m-%d"), class: "form-control" %>
 			</div>
 			<div class="form-group col-xs-2">
 				<%= label_tag "api_data[EventType]", "Workout  Type: " %>
@@ -333,7 +384,7 @@
 				</div>
 				<div class="form-group col-xs-2">
 					<%= label_tag "api_data[WorkoutDay]", "Workout Day: " %>
-					<%= text_field_tag "api_data[WorkoutDay]", DateTime.now, class: "form-control" %>
+					<%= date_field_tag "api_data[WorkoutDay]", DateTime.now.strftime("%Y-%m-%d"), class: "form-control" %>
 				</div>
 				<div class="form-group col-xs-3">
 					<%= label_tag "api_data[WorkoutType]", "Workout  Type: " %>
@@ -352,6 +403,10 @@
 				<div class="form-group col-xs-2">
 					<%= label_tag "api_data[locked]", "Locked: " %>
 					<%= text_field_tag "api_data[locked]", "false", class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "api_data[structure]", "Structure: " %>
+					<%= text_area_tag "api_data[structure]", "", class: "form-control" %>
 				</div>
 			</div>
 			<%= submit_tag "Post Plan", class: "btn btn-primary pull-right" %>

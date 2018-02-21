@@ -22,7 +22,6 @@ class Token < ApplicationRecord
 		end
 		parsed_body = JSON.parse(response.env.body, symbolize_names: true)
 		parsed_body[:expires_at] = expired_time
-		puts parsed_body.inspect
 		self.update(parsed_body)
 	end
 

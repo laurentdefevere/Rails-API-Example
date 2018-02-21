@@ -3,6 +3,8 @@ module ApiService
 
 	self::ENDPOINTS = {
 		'Post Metric' => 'v1/metrics',
+		'Get Metrics' => 'v1/metrics',
+		'Get Metrics For Athlete' => 'v1/metrics',
 		'Post File' => '/v1/file',
 		'Post Plan' => 'v1/workouts/plan',
 		'Post Event' => '/v1/events',
@@ -18,11 +20,12 @@ module ApiService
 		'Get Coach Profile' => '/v1/coach/profile',
 		'Get Assistant Coaches' => '/v1/coach/assistants',
 		'Get Zones' => '/v1/athlete/profile/zones',
-		'Get Workout By Id' => '/v1/workouts/id',
+		'Get Workout By Id' => '/v1/workouts',
 		'Get Workout Mean Maxes' => '/v1/workouts/id',
-		'Get Athelte Workout Mean Maxes' => '/v1/workouts',
+		'Get Workout Details' => '/v1/workouts/id',
+		'Get Athlete Workout Mean Maxes' => '/v1/workouts',
 		'Get Workout Time In Zones' => '/v1/workouts/id',
-		'Get Athelte Workout Time In Zones' => '/v1/workouts'
+		'Get Athlete Workout Time In Zones' => '/v1/workouts'
 	}
 
 	def post_data(api_action, post_data)
@@ -41,7 +44,18 @@ module ApiService
 		response.env
 	end
 
+	def get_metrics(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:start_date]}/#{get_data[:end_date]}");
+		response.env
+	end
+
+	def get_athlete_metrics(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:athleteid]}/#{get_data[:start_date]}/#{get_data[:end_date]}");
+		response.env
+	end
+
 	def get_workout_by_id(api_action, get_data)
+		puts "#{ENDPOINTS[api_action]}/#{get_data[:id]}".inspect
 		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:id]}")
 		response.env
 	end
@@ -53,6 +67,12 @@ module ApiService
 
 	def get_athlete_workout_meanmaxes(api_action, get_data)
 		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:athleteid]}/id/#{get_data[:id]}/meanmaxes")
+		response.env
+	end
+
+	def get_details(api_action, get_data)
+		response = conn.get("#{ENDPOINTS[api_action]}/#{get_data[:id]}/details")
+		puts response.inspect
 		response.env
 	end
 
