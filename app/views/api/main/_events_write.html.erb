@@ -1,0 +1,42 @@
+<div class="panel-group" id="accordion">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<a class="panel-toggle" data-toggle="collapse" data-target="#collapseEventWrite" aria-expanded="true" aria-controls="collapseEventWrite">
+				<h2 class="panel-heading"> 
+					Create Events
+				</h2>
+			</a>
+		</div>
+	</div>
+	<div id="collapseEventWrite" class="panel panel-collapse collapse">
+		<div class="panel-body">
+			<h4> POST Event</h4>
+			<h5> This is an example of making a post request to "/v1/events" </h5>
+			<%= form_tag("/events/add") do %>
+			<div class="form-row">
+				<div class="form-group col-xs-2">
+					<%= label_tag "athleteid", "Athlete id: " %>
+					<%= text_field_tag "athleteid", "123456", class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "Name", "Name: " %>
+					<%= text_field_tag "Name", "Event Name", class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-2">
+					<%= label_tag "EventDate", "Event Day: " %>
+					<%= date_field_tag "EventDate", 1.day.from_now.strftime("%Y-%m-%d"), class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-2">
+					<%= label_tag "EventType", "Workout  Type: " %>
+					<%= text_field_tag "EventType", "Cycling", class: "form-control" %>
+				</div>
+				<div class="form-group col-xs-3">
+					<%= label_tag "Description", "Description: " %>
+					<%= text_field_tag "Description", "", class: "form-control" %>
+				</div>
+			</div>
+			<%= submit_tag "Post Event", class: "btn btn-primary pull-right" %>
+			<% end %>
+		</div>
+	</div>
+</div>

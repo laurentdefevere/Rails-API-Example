@@ -14,3 +14,24 @@
 body{
 	background: #005695;
 }
+h2.panel-heading{
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	margin: 0;
+}
+a.panel-toggle:hover{
+	color: white;
+	text-decoration: none;
+}
+.panel.panel-primary{
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+	background-color: #428bca;
+	border-color: #428bca;
+}
+.panel-group > .panel.panel-collapse{
+	margin-top: 0;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

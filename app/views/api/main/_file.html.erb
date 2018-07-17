@@ -1,0 +1,30 @@
+<div class="panel-group" id="accordion">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<a class="panel-toggle" data-toggle="collapse" data-target="#collapseFile" aria-expanded="true" aria-controls="collapseFile">
+				<h2 class="panel-heading"> 
+					File
+				</h2>
+			</a>
+		</div>
+	</div>
+	<div id="collapseFile" class="panel panel-collapse collapse">
+		<div class="panel-body">
+			<h4>POST workout file</h4>
+			<h5>This is an example of making a post request to "/v1/file"</h5>
+			<%= form_tag("/files/add", multipart: true) do %>
+				<div class="form-row">
+					<div class="form-group col-xs-6">
+						<%= label_tag "Data", "Filename: " %>
+						<%= file_field_tag "Data", class: "form-control-file" %>
+					</div>
+					<div class="form-group col-xs-6">
+						<%= label_tag "Title", "Title: " %>
+						<%= text_field_tag "title", "", class: "form-control" %>
+					</div>
+				</div>
+				<%= submit_tag "Post File", class: "btn btn-primary pull-right" %>
+			<% end %>
+		</div>
+	</div>
+</div>

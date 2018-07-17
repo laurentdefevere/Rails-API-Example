@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
 	before_action :validate_token
 	helper_method :current_token
 
+	def render_response(response)
+		if response.success?
+			if params[:commit] == 'Get File' && params[:file_format] != 'json'
+				filename = "#{params[:workout_id]}.#{params[:file_format]}"
+				send_data(response.body, :disposition => 'attachment', :filename => filename)				
+			else
+				render body: response.body
+			end
+		else
+			render json: {status: response.status, reason: response.reason_phrase  }
+		end
+	end
+
 	private
 
 	def validate_token
