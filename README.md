@@ -31,26 +31,6 @@
     - All the environment variables live in config/application.yml
 * Using the browser of your choice visit localhost:3000/
 
-#### Folders/Files of interest:
-
-* Routes:
-  - config/routes.rb
-* Controllers:
-  - app/controllers/
-    - In app/controllers/oauth_controller.rb you can see a commented out example
-      of implementing oauth using the gem [Oauth2-client](https://github.com/tiabas/oauth2-client)
-* Models:
-  - app/models/
-* Services:
-  - app/services/oauth_service.rb
-    - This class is an example of implementing oauth using the gem [Faraday](https://github.com/lostisland/faraday)
-  - app/services/api_service.rb
-    - This class is an example of making calls to the TrainingPeaks API using the gem [Faraday](https://github.com/lostisland/faraday)
-* Views:
-  - app/views/api/new.html.erb
-    - The form in this file, shows just one way to structure the data
-      that is being passed into the params.
-
 #### Notes:
 
 * gem [Figaro](https://github.com/laserlemon/figaro)
